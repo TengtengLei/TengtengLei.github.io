@@ -15,3 +15,9 @@ draft/
 
 # Claude Code 的本地预览配置（只在你这台电脑上有用，不用上传）
 .claude/
+
+# 相机原图不要进仓库 —— 一张就 23 MB，每个人 clone 都要下载一遍。
+# 网页上用的是压缩过的版本，原图留在本地做备份即可。
+assets/img/me.jpg
+assets/img/*-original.*
+assets/img/_raw/
