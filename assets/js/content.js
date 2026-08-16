@@ -1,4 +1,4 @@
-/* ═══════════════════════════════════════════════════════════════════════
+﻿/* ═══════════════════════════════════════════════════════════════════════
    ★★★ 这是你唯一需要改的文件 ★★★
 
    内容已按你的 CV 填好。以后更新只改这里。
@@ -138,11 +138,16 @@ window.SITE = {
 
   /* ── 4. 学术发表 ──────────────────────────────────────────────────────
      type 决定标签颜色：'journal' 期刊 / 'conference' 会议 /
-                        'preprint' 审稿中 / 'chapter' 专著章节
-     authors: 你自己的名字用星号包起来 *Tengteng Lei*，会自动高亮。
+                        'patent' 专利 / 'preprint' 预印本 / 'chapter' 专著章节
+
+     authors: 两种标记 ——
+              *Tengteng Lei*  用星号包起来 = 高亮（你自己）
+              Man Wong^       名字后面加 ^ = 通讯作者（显示成上标 *）
+              两个可以叠加：*Tengteng Lei*^
      venue:   期刊名用星号包起来 *Journal Name*，会自动变斜体。
-     links:   想加几个就加几个（DOI / PDF / Code / Slides…），
-              没有链接就写 links: []
+     doi:     只填 DOI 本身（不要带 https://doi.org/），
+              页面上会自动显示成完整链接，单独占一行。没有就留空 ''。
+     links:   额外的按钮（PDF / Code / Slides…），没有就写 links: []
      ─────────────────────────────────────────────────────────────────── */
   publications: [
     {
@@ -169,15 +174,17 @@ window.SITE = {
       authors: '*Tengteng Lei*, Jiayi Mao, Yushen Hu, Man Wong',
       venue: { en: '*IEEE Journal on Emerging and Selected Topics in Circuits and Systems*, vol. 16, no. 2, pp. 607–616.',
                zh: '*IEEE Journal on Emerging and Selected Topics in Circuits and Systems*，第 16 卷第 2 期，607–616 页。' },
+      doi: '10.1109/jetcas.2026.3688129',
       links: []
     },
     {
       year: 2026, type: 'journal',
       title: { en: 'An Active-Matrix Digital Microfluidic Device Based on Surfactant-Mediated Electro-Dewetting',
                zh: '基于表面活性剂介导电润湿的有源矩阵数字微流控器件' },
-      authors: 'Xinying Xie, Qining Leo Wang, Runxiao Shi, *Tengteng Lei*, Chang-Jin “CJ” Kim, Man Wong',
-      venue: { en: '*Lab on a Chip* — corresponding author.', zh: '*Lab on a Chip*，通讯作者。' },
-      links: [ { label: 'DOI', url: 'https://doi.org/10.1039/d5lc00992h' } ]
+      authors: 'Xinying Xie, Qining Leo Wang, Runxiao Shi, *Tengteng Lei*^, Chang-Jin “CJ” Kim, Man Wong',
+      venue: { en: '*Lab on a Chip*.', zh: '*Lab on a Chip*。' },
+      doi: '10.1039/d5lc00992h',
+      links: []
     },
     {
       year: 2025, type: 'journal',
@@ -186,6 +193,7 @@ window.SITE = {
       authors: '*Tengteng Lei*, Yushen Hu, Xinying Xie, Runxiao Shi, Man Wong',
       venue: { en: '*Advanced Electronic Materials*, vol. 11, no. 9, 2400572.',
                zh: '*Advanced Electronic Materials*，第 11 卷第 9 期，2400572。' },
+      doi: '10.1002/aelm.202400572',
       links: []
     },
     {
@@ -195,15 +203,17 @@ window.SITE = {
       authors: '*Tengteng Lei*, Boyi Zhu, Yushen Hu, Man Wong',
       venue: { en: 'Digest Tech. Papers *Transducers 2025*, Orlando, pp. 1621–1624.',
                zh: '*Transducers 2025* 论文集，美国奥兰多，1621–1624 页。' },
+      doi: '10.1109/transducers61432.2025.11109844',
       links: []
     },
     {
       year: 2024, type: 'journal',
       title: { en: 'A Sliding-Kernel Computation-in-Memory Architecture for Convolutional Neural Networks',
                zh: '面向卷积神经网络的滑动核存内计算架构' },
-      authors: 'Yushen Hu, Xinying Xie, *Tengteng Lei*, Runxiao Shi, Man Wong',
-      venue: { en: '*Advanced Science*, vol. 11, no. 46, 2407440 — corresponding author.',
-               zh: '*Advanced Science*，第 11 卷第 46 期，2407440。通讯作者。' },
+      authors: 'Yushen Hu, Xinying Xie, *Tengteng Lei*^, Runxiao Shi, Man Wong',
+      venue: { en: '*Advanced Science*, vol. 11, no. 46, 2407440.',
+               zh: '*Advanced Science*，第 11 卷第 46 期，2407440。' },
+      doi: '10.1002/advs.202407440',
       links: []
     },
     {
@@ -222,6 +232,7 @@ window.SITE = {
       authors: 'Runxiao Shi, *Tengteng Lei*, Zhihe Xia, Man Wong',
       venue: { en: '*Journal of Semiconductors*, 44, 091601 — co-first author.',
                zh: '*Journal of Semiconductors*，44，091601。共同第一作者。' },
+      doi: '10.1088/1674-4926/44/9/091601',
       links: []
     },
     {
@@ -240,6 +251,7 @@ window.SITE = {
       authors: '*Tengteng Lei*, Yushen Hu, Man Wong',
       venue: { en: 'Digest Tech. Papers *MEMS 2023*, Munich, pp. 13–16 — oral.',
                zh: '*MEMS 2023* 论文集，德国慕尼黑，13–16 页。口头报告。' },
+      doi: '10.1109/mems49605.2023.10052560',
       links: []
     },
     {
@@ -249,6 +261,7 @@ window.SITE = {
       authors: '*Tengteng Lei*, Runxiao Shi, Yuqi Wang, Zhihe Xia, Man Wong',
       venue: { en: '*IEEE Transactions on Electron Devices*, vol. 69, no. 8, pp. 3186–3191.',
                zh: '*IEEE Transactions on Electron Devices*，第 69 卷第 8 期，3186–3191 页。' },
+      doi: '10.1109/ted.2022.3167940',
       links: []
     },
     {
@@ -258,6 +271,7 @@ window.SITE = {
       authors: '*Tengteng Lei*, Yushen Hu, Man Wong',
       venue: { en: 'Digest Tech. Papers *MEMS 2022*, Tokyo, pp. 71–74 — oral.',
                zh: '*MEMS 2022* 论文集，日本东京，71–74 页。口头报告。' },
+      doi: '10.1109/mems51670.2022.9699743',
       links: []
     },
     {
@@ -267,6 +281,7 @@ window.SITE = {
       authors: '*Tengteng Lei*, Congwei Liao, Jie Huang, Shengdong Zhang',
       venue: { en: '*SID Symposium Digest of Technical Papers*, 51(1), pp. 1354–1357.',
                zh: '*SID Symposium Digest of Technical Papers*，51(1)，1354–1357 页。' },
+      doi: '10.1002/sdtp.14135',
       links: []
     },
     {
@@ -276,6 +291,7 @@ window.SITE = {
       authors: '*Tengteng Lei*, Congwei Liao, Jie Huang, Jiwen Yang, Shengdong Zhang',
       venue: { en: '*SID Symposium Digest of Technical Papers*, 50(1), pp. 1660–1663.',
                zh: '*SID Symposium Digest of Technical Papers*，50(1)，1660–1663 页。' },
+      doi: '10.1002/sdtp.13269',
       links: []
     },
     {

@@ -434,6 +434,19 @@ html[data-theme="dark"] .icon-moon { display: block; }
 html[data-theme="dark"] .pub__authors .me { color: #1A1523; }
 .pub__venue { font-size: .95rem; margin: 0; color: var(--muted); font-weight: 600; }
 .pub__venue em { color: var(--ink); }
+
+/* 通讯作者标记：名字后面的上标 * */
+.corr { font-weight: 900; color: var(--ink); padding-left: 1px; }
+.page__lede .corr { color: var(--muted); }
+
+/* DOI 单独一行，直接把链接本身显示出来 */
+.pub__doi { margin: .4rem 0 0; font-size: .88rem; font-weight: 600; }
+.pub__doi a {
+  color: var(--muted); word-break: break-all;
+  text-decoration: underline; text-decoration-thickness: 2px;
+  text-decoration-color: var(--accent); text-underline-offset: 3px;
+}
+.pub__doi a:hover { color: var(--ink); }
 .pub__links { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .7rem; }
 .pub__links a {
   font-size: .8rem; font-weight: 800; padding: .12rem .6rem; text-decoration: none;

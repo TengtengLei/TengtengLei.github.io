@@ -50,8 +50,8 @@
                    zh: '留言板还没开通。打开 content.js 第 8 节，按里面的步骤配置一下就能用（大约三分钟）。' }
     },
     lede: {
-      publications: { en: 'Peer-reviewed articles, conference papers and preprints. Please email me if you cannot access a PDF.',
-                      zh: '同行评议论文、会议论文与预印本。如果某篇拿不到全文，欢迎发邮件向我索取。' },
+      publications: { en: 'Peer-reviewed articles, conference papers, patents and preprints. <sup class="corr">*</sup> marks corresponding authorship. Please email me if you cannot access a PDF.',
+                      zh: '同行评议论文、会议论文、专利与预印本。<sup class="corr">*</sup> 表示通讯作者。如果某篇拿不到全文，欢迎发邮件向我索取。' },
       cv:           { en: 'Education, appointments, funding and service. A full PDF version is available below.',
                       zh: '教育背景、任职经历、基金与学术服务。完整版简历可在下方下载。' }
     }
@@ -96,7 +96,14 @@
   function has(v) { return t(v).trim() !== ''; }
   function nonEmpty(arr) { return Array.isArray(arr) && arr.length > 0; }
   function em(str) { return String(str).replace(/\*([^*]+)\*/g, '<em>$1</em>'); }
-  function me(str) { return String(str).replace(/\*([^*]+)\*/g, '<span class="me">$1</span>'); }
+  // 作者列表里的两种标记：
+  //   *名字*  → 高亮（你自己）
+  //   名字^   → 名字后面加一个上标 *，表示通讯作者
+  function me(str) {
+    return String(str)
+      .replace(/\*([^*]+)\*/g, '<span class="me">$1</span>')
+      .replace(/\^/g, '<sup class="corr" title="Corresponding author">*</sup>');
+  }
   function attr(s) { return String(s).replace(/"/g, '&quot;'); }
   function emptyBlock(msg) { return '<div class="empty">' + (msg || t(UI.labels.empty)) + '</div>'; }
   function extLink(url) { return /^https?:\/\//i.test(url) ? ' target="_blank" rel="noopener"' : ''; }
@@ -232,6 +239,10 @@
       h += '<p class="pub__title">' + t(p.title) + badge + '</p>';
       if (p.authors)    h += '<p class="pub__authors">' + me(p.authors) + '</p>';
       if (has(p.venue)) h += '<p class="pub__venue">' + em(t(p.venue)) + '</p>';
+      if (p.doi) {
+        h += '<p class="pub__doi"><a href="https://doi.org/' + attr(p.doi) +
+             '" target="_blank" rel="noopener">https://doi.org/' + p.doi + '</a></p>';
+      }
       if (nonEmpty(p.links)) {
         h += '<div class="pub__links">';
         p.links.forEach(function (l) {
