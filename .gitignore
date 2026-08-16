@@ -1,0 +1,17 @@
+# 系统垃圾文件
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# 编辑器
+.vscode/
+.idea/
+*.swp
+
+# 临时文件 / 草稿
+*.tmp
+~$*
+draft/
+
+# Claude Code 的本地预览配置（只在你这台电脑上有用，不用上传）
+.claude/

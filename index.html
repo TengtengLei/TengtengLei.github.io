@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- ===================================================================
+     SEO / 搜索引擎信息。改完 content.js 之后，把下面这几行也一起改掉。
+     =================================================================== -->
+<title>Your Name — Postdoctoral Researcher, Northeastern University London</title>
+<meta name="description" content="Personal academic homepage of Your Name, postdoctoral researcher at Northeastern University London. Research, publications, teaching and outreach.">
+<meta name="author" content="Your Name">
+<meta name="theme-color" content="#FF2E88">
+
+<meta property="og:type" content="profile">
+<meta property="og:title" content="Your Name — Postdoctoral Researcher">
+<meta property="og:description" content="Research, publications, teaching and science outreach.">
+<meta property="og:image" content="assets/img/profile.jpg">
+
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:ital,wght@0,400;0,600;0,700;0,900;1,400&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="assets/css/style.css">
+
+<!-- Google 会用这段结构化数据，把你识别成一个「人」而不是一个普通网页 -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Your Name",
+  "jobTitle": "Postdoctoral Researcher",
+  "email": "mailto:t.lei@nulondon.ac.uk",
+  "affiliation": {
+    "@type": "Organization",
+    "name": "Northeastern University London"
+  }
+}
+</script>
+</head>
+
+<body>
+
+<!-- 背景上飘着的彩色色块，纯装饰 -->
+<div class="blobs" aria-hidden="true">
+  <span class="blob blob--1"></span>
+  <span class="blob blob--2"></span>
+  <span class="blob blob--3"></span>
+</div>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="topbar">
+  <div class="topbar__row">
+    <a class="brand" href="#/about">
+      <span class="brand__sticker" aria-hidden="true"></span>
+      <span data-slot="brandName">Your Name</span>
+    </a>
+
+    <div class="topbar__tools">
+      <button class="btn btn--pill" id="langToggle" type="button" aria-label="Switch language">
+        <span id="langLabel">中文</span>
+      </button>
+      <button class="btn btn--square" id="themeToggle" type="button" aria-label="Switch colour theme">
+        <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.2 5.2l1.6 1.6M17.2 17.2l1.6 1.6M18.8 5.2l-1.6 1.6M6.8 17.2l-1.6 1.6"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.2A8.2 8.2 0 0 1 9.8 4a8.4 8.4 0 1 0 10.2 10.2z"/></svg>
+      </button>
+      <button class="btn btn--square navtoggle" id="navToggle" type="button" aria-label="Menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <nav class="nav" id="nav" aria-label="Main"></nav>
+</header>
+
+<main id="main" class="main"></main>
+
+<footer class="footer">
+  <div class="footer__inner">
+    <p data-slot="footerLine"></p>
+    <p class="footer__meta"><span data-slot="footerUpdated"></span></p>
+  </div>
+</footer>
+
+<noscript>
+  <div class="callout">
+    This site renders its content with JavaScript. Please enable it, or contact me at
+    <a href="mailto:t.lei@nulondon.ac.uk">t.lei@nulondon.ac.uk</a>.
+  </div>
+</noscript>
+
+<script src="assets/js/content.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>
