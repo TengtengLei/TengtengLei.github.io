@@ -11,6 +11,7 @@
       about:        { en: 'About',        zh: '关于我'   },
       research:     { en: 'Research',     zh: '研究'     },
       publications: { en: 'Publications', zh: '论文'     },
+      group:        { en: 'Group',        zh: '课题组'   },
       teaching:     { en: 'Teaching',     zh: '教学'     },
       media:        { en: 'Outreach',     zh: '科普'     },
       life:         { en: 'Life',         zh: '生活'     },
@@ -20,6 +21,9 @@
     headings: {
       news:       { en: 'News',                  zh: '最新动态'   },
       areas:      { en: 'Research Areas',        zh: '研究方向'   },
+      members:    { en: 'Members',               zh: '成员'       },
+      alumni:     { en: 'Alumni',                zh: '毕业去向'   },
+      activities: { en: 'Life in the Group',     zh: '组里的日常' },
       courses:    { en: 'Courses',               zh: '课程'       },
       faq:        { en: 'For Students',          zh: '给学生'     },
       videos:     { en: 'Videos & Talks',        zh: '视频与讲座' },
@@ -80,7 +84,7 @@
   var pubFilter = 'all';
 
   // 导航顺序。想调整就改这一行的先后，颜色会自动跟着页面走。
-  var PAGES = ['about', 'cv', 'research', 'publications', 'teaching', 'media', 'life', 'hello'];
+  var PAGES = ['about', 'cv', 'research', 'publications', 'group', 'teaching', 'media', 'life', 'hello'];
 
   /* ---------- 小工具 ---------- */
 
@@ -260,6 +264,84 @@
       h += '</div></article>';
     });
 
+    return h + '</div>';
+  }
+
+  /* ---------- 页面：课题组 ---------- */
+
+  // 没有照片时，用姓名首字母做头像。中文名取第一个字，英文名取首字母。
+  function initials(name) {
+    var s = String(name).trim();
+    if (!s) return '·';
+    if (/[一-鿿]/.test(s)) return s.charAt(0);
+    return s.split(/\s+/).slice(0, 2).map(function (w) { return w.charAt(0); }).join('').toUpperCase();
+  }
+
+  function personCard(p) {
+    var h = '<article class="person">';
+    if (p.photo) {
+      h += '<img class="person__photo" src="' + attr(p.photo) + '" alt="' + attr(t(p.name)) +
+           '" loading="lazy" onerror="this.remove()">';
+    } else {
+      h += '<div class="person__initials" aria-hidden="true">' + initials(t(p.name)) + '</div>';
+    }
+    h += '<h3 class="person__name">' + t(p.name) + '</h3>';
+    if (has(p.role)) h += '<p class="person__role">' + t(p.role) + '</p>';
+    if (has(p.bio))  h += '<p class="person__bio">' + t(p.bio) + '</p>';
+    if (nonEmpty(p.links)) {
+      h += '<div class="person__links">';
+      p.links.forEach(function (l) {
+        h += '<a href="' + attr(l.url) + '"' + extLink(l.url) +
+             ' aria-label="' + attr(l.icon || 'link') + '">' + icon(l.icon || 'link') + '</a>';
+      });
+      h += '</div>';
+    }
+    return h + '</article>';
+  }
+
+  function pageGroup() {
+    var g = S.group || {};
+    var h = '<div class="page"><header class="page__head">';
+    h += '<h1 class="page__title">' + t(UI.nav.group) + '</h1>';
+    if (has(g.lede)) h += '<p class="page__lede">' + t(g.lede) + '</p>';
+    h += '</header>';
+
+    var anything = false;
+
+    if (nonEmpty(g.members)) {
+      anything = true;
+      h += '<section class="section"><h2 class="section__title">' + t(UI.headings.members) + '</h2>';
+      h += '<div class="grid grid--3">' + g.members.map(personCard).join('') + '</div></section>';
+    }
+
+    if (nonEmpty(g.alumni)) {
+      anything = true;
+      h += '<section class="section"><h2 class="section__title">' + t(UI.headings.alumni) + '</h2>';
+      h += '<ul class="cvspine">';
+      g.alumni.forEach(function (a) { h += '<li>' + t(a) + '</li>'; });
+      h += '</ul></section>';
+    }
+
+    if (g.activities && nonEmpty(g.activities.items)) {
+      anything = true;
+      h += '<section class="section"><h2 class="section__title">' + t(UI.headings.activities) + '</h2>';
+      if (has(g.activities.lede)) h += '<p class="page__lede" style="margin-bottom:1.4rem">' + t(g.activities.lede) + '</p>';
+      h += '<div class="grid grid--3">';
+      g.activities.items.forEach(function (s) {
+        h += '<figure class="snap">';
+        if (s.photo) {
+          h += '<img class="snap__img" src="' + attr(s.photo) + '" alt="" loading="lazy" onerror="this.remove()">';
+        } else {
+          h += '<div class="snap__placeholder" aria-hidden="true">' + (s.emoji || '📷') + '</div>';
+        }
+        h += '<figcaption><span class="snap__caption">' + t(s.caption) + '</span>';
+        if (has(s.date)) h += '<span class="snap__date">' + t(s.date) + '</span>';
+        h += '</figcaption></figure>';
+      });
+      h += '</div></section>';
+    }
+
+    if (!anything) h += emptyBlock();
     return h + '</div>';
   }
 
@@ -586,7 +668,7 @@
   /* ---------- 路由 ---------- */
   var RENDER = {
     about: pageAbout, research: pageResearch, publications: pagePublications,
-    teaching: pageTeaching, media: pageMedia, life: pageLife,
+    group: pageGroup, teaching: pageTeaching, media: pageMedia, life: pageLife,
     cv: pageCv, hello: pageGuestbook
   };
 

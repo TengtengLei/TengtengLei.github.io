@@ -23,6 +23,7 @@
   --c-cyan:   #4BCAE4;   /* 雾霾蓝   H 214  */
   --c-blue:   #90B7FF;   /* 长春花蓝 H 262.9*/
   --c-purple: #C6A5F4;   /* 薰衣草紫 H 302.5*/
+  --c-orchid: #E39CD8;   /* 兰花紫   H 332.1*/
 
   /* 基础色 */
   --ink:      #1A1523;
@@ -58,6 +59,7 @@ html[data-theme="dark"] {
 html[data-page="about"]        { --accent: var(--c-pink);   }
 html[data-page="research"]     { --accent: var(--c-blue);   }
 html[data-page="publications"] { --accent: var(--c-purple); }
+html[data-page="group"]        { --accent: var(--c-orchid); }
 html[data-page="teaching"]     { --accent: var(--c-green);  }
 html[data-page="media"]        { --accent: var(--c-orange); }
 html[data-page="life"]         { --accent: var(--c-yellow); }
@@ -177,6 +179,7 @@ html[data-theme="dark"] .icon-moon { display: block; }
 .nav a[href="#/cv"]           { --pill: var(--c-cyan);   }
 .nav a[href="#/research"]     { --pill: var(--c-blue);   }
 .nav a[href="#/publications"] { --pill: var(--c-purple); }
+.nav a[href="#/group"]        { --pill: var(--c-orchid); }
 .nav a[href="#/teaching"]     { --pill: var(--c-green);  }
 .nav a[href="#/media"]        { --pill: var(--c-orange); }
 .nav a[href="#/life"]         { --pill: var(--c-yellow); }
@@ -561,6 +564,72 @@ html[data-theme="dark"] .pub__authors .me { color: #1A1523; }
 .episode__desc { font-size: .96rem; margin: 0 0 .7rem; }
 .episode audio { width: 100%; height: 38px; }
 .embed-wrap iframe { width: 100%; border: 0; border-radius: var(--r-sm); }
+
+/* ---------- 课题组：成员 ---------- */
+.person {
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+  border: var(--bw) solid var(--line); border-radius: var(--r);
+  background: var(--surface); padding: 1.6rem 1.5rem;
+  box-shadow: 6px 6px 0 var(--shadow);
+  transition: transform .16s cubic-bezier(.34,1.4,.5,1), box-shadow .16s;
+}
+.person:hover { transform: translate(-4px,-4px); box-shadow: 10px 10px 0 var(--shadow); }
+
+/* 没有照片时用姓名首字母，颜色逐张轮换 */
+.person__photo, .person__initials {
+  width: 98px; height: 98px; border-radius: 50%; flex: none;
+  border: var(--bw) solid var(--line); margin-bottom: 1rem;
+  object-fit: cover; background: var(--tint, var(--accent));
+}
+.person__initials {
+  display: grid; place-items: center; color: #1A1523;
+  font-family: var(--font-display); font-size: 2rem; font-weight: 600;
+}
+.person__name { font-family: var(--font-display); font-size: 1.14rem; font-weight: 600; margin: 0 0 .35rem; }
+.person__role {
+  display: inline-block; font-family: var(--font-display); font-size: .8rem; font-weight: 500;
+  border: 2px solid var(--line); border-radius: 100px; padding: .04rem .65rem;
+  background: var(--tint, var(--accent)); color: #1A1523; margin: 0 0 .8rem;
+}
+.person__bio { margin: 0 0 1rem; color: var(--muted); font-weight: 600; font-size: .94rem; }
+.person__links { display: flex; flex-wrap: wrap; gap: .4rem; justify-content: center; margin-top: auto; }
+.person__links a {
+  display: inline-grid; place-items: center; width: 32px; height: 32px;
+  border: 2px solid var(--line); border-radius: 50%; background: var(--surface);
+  transition: background .14s, transform .14s;
+}
+.person__links a:hover { background: var(--tint, var(--accent)); transform: translateY(-2px); }
+.person__links svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ---------- 课题组：活动照片 ---------- */
+.snap {
+  margin: 0; overflow: hidden;
+  border: var(--bw) solid var(--line); border-radius: var(--r);
+  background: var(--surface); box-shadow: 6px 6px 0 var(--shadow);
+  transition: transform .16s cubic-bezier(.34,1.4,.5,1), box-shadow .16s;
+}
+.snap:hover { transform: translate(-3px,-4px) rotate(-.7deg); box-shadow: 10px 10px 0 var(--shadow); }
+.snap__img, .snap__placeholder {
+  width: 100%; aspect-ratio: 4/3; display: block;
+  border-bottom: var(--bw) solid var(--line);
+}
+.snap__img { object-fit: cover; }
+/* color 写死成深色，理由同 .now__icon：emoji 退化成单色字形时才不会消失 */
+.snap__placeholder {
+  display: grid; place-items: center; font-size: 2.8rem;
+  background: var(--tint, var(--accent)); color: #1A1523;
+}
+.snap figcaption { padding: .95rem 1.15rem 1.1rem; }
+.snap__caption { display: block; font-family: var(--font-display); font-size: 1rem; font-weight: 500; margin-bottom: .2rem; }
+.snap__date { font-size: .85rem; color: var(--muted); font-weight: 700; }
+
+/* 成员卡和活动卡的配色都逐张轮换 */
+.grid > .person:nth-child(6n+1), .grid > .snap:nth-child(6n+1) { --tint: var(--c-pink);   }
+.grid > .person:nth-child(6n+2), .grid > .snap:nth-child(6n+2) { --tint: var(--c-cyan);   }
+.grid > .person:nth-child(6n+3), .grid > .snap:nth-child(6n+3) { --tint: var(--c-yellow); }
+.grid > .person:nth-child(6n+4), .grid > .snap:nth-child(6n+4) { --tint: var(--c-green);  }
+.grid > .person:nth-child(6n+5), .grid > .snap:nth-child(6n+5) { --tint: var(--c-orchid); }
+.grid > .person:nth-child(6n+6), .grid > .snap:nth-child(6n+6) { --tint: var(--c-orange); }
 
 /* ---------- 13. 生活页 ---------- */
 /* 此刻 */

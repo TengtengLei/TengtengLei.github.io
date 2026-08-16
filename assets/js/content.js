@@ -357,7 +357,96 @@ window.SITE = {
     }
   ],
 
-  /* ── 5. 教学 ──────────────────────────────────────────────────────────
+  /* ── 5. 课题组 ────────────────────────────────────────────────────────
+     ⚠️ 下面全是占位示例，换成真人。
+
+     members 一个人的格式：
+       {
+         photo: '',                                  // 留空就用姓名首字母做头像，
+                                                     // 有照片放 assets/img/，正方形
+         name: { en: 'Name', zh: '姓名' },
+         role: { en: 'PhD Student', zh: '博士生' },
+         bio:  { en: '…', zh: '…' },                 // 一两句话
+         links: [ { icon: 'mail', url: 'mailto:…' } ] // icon 可选：
+       }                                              // mail / scholar / orcid / github / link
+
+     alumni  一行一个人，写去向。不需要就设成 []
+     activities.items：
+       { photo: '', emoji: '🍜', caption: {en,zh}, date: {en,zh} }
+       photo 留空就显示 emoji 色块，填了就显示照片（建议 4:3）
+     ─────────────────────────────────────────────────────────────────── */
+  group: {
+    lede: {
+      en: 'The people I work with, and what we get up to when we are not in the cleanroom.',
+      zh: '和我一起工作的人，以及我们不在洁净室的时候在干什么。'
+    },
+
+    members: [
+      {
+        photo: '',
+        name: { en: 'Tengteng Lei', zh: '雷腾腾' },
+        role: { en: 'Research Associate', zh: '研究员' },
+        bio: { en: 'Brain-inspired learning accelerators, in-sensor computing, thin-film circuits.',
+               zh: '类脑学习加速器、传感器内计算、薄膜电路。' },
+        links: [
+          { icon: 'mail',  url: 'mailto:t.lei@nulondon.ac.uk' },
+          { icon: 'orcid', url: 'https://orcid.org/0000-0002-3780-0058' }
+        ]
+      },
+      {
+        photo: '',
+        name: { en: 'Member Two', zh: '成员二' },
+        role: { en: 'PhD Student', zh: '博士生' },
+        bio: { en: 'One or two sentences on what they work on.', zh: '一两句话说明他/她在做什么方向。' },
+        links: [ { icon: 'mail', url: 'mailto:someone@example.ac.uk' } ]
+      },
+      {
+        photo: '',
+        name: { en: 'Member Three', zh: '成员三' },
+        role: { en: 'MSc Student', zh: '硕士生' },
+        bio: { en: 'One or two sentences on what they work on.', zh: '一两句话说明他/她在做什么方向。' },
+        links: []
+      },
+      {
+        photo: '',
+        name: { en: 'Member Four', zh: '成员四' },
+        role: { en: 'Visiting Researcher', zh: '访问学者' },
+        bio: { en: 'One or two sentences on what they work on.', zh: '一两句话说明他/她在做什么方向。' },
+        links: []
+      }
+    ],
+
+    // 毕业去向。不需要就设成 []
+    alumni: [
+      { en: '<em>Name</em> — PhD 2026, now at [Company / University].',
+        zh: '<em>姓名</em> —— 2026 年博士毕业，现于【公司 / 学校】。' },
+      { en: '<em>Name</em> — MSc 2025, now at [Company / University].',
+        zh: '<em>姓名</em> —— 2025 年硕士毕业，现于【公司 / 学校】。' }
+    ],
+
+    activities: {
+      lede: {
+        en: 'Group dinners, conference trips, and the occasional escape from the lab.',
+        zh: '聚餐、出差开会，以及偶尔逃离实验室的时刻。'
+      },
+      items: [
+        { photo: '', emoji: '🍜', caption: { en: 'Group dinner after the tape-out', zh: '流片之后的组会聚餐' },
+          date: { en: 'June 2026', zh: '2026 年 6 月' } },
+        { photo: '', emoji: '🎤', caption: { en: 'Conference trip to Orlando', zh: '奥兰多参会' },
+          date: { en: 'July 2025', zh: '2025 年 7 月' } },
+        { photo: '', emoji: '🥾', caption: { en: 'Weekend walk in the Peak District', zh: '峰区周末徒步' },
+          date: { en: 'May 2025', zh: '2025 年 5 月' } },
+        { photo: '', emoji: '🎂', caption: { en: 'Someone defended, so: cake', zh: '有人答辩通过了，于是有蛋糕' },
+          date: { en: 'March 2025', zh: '2025 年 3 月' } },
+        { photo: '', emoji: '🧋', caption: { en: 'The weekly bubble tea run', zh: '每周一次的奶茶行动' },
+          date: { en: 'Ongoing', zh: '长期项目' } },
+        { photo: '', emoji: '🔬', caption: { en: 'First light from the new probe station', zh: '新探针台第一次出数据' },
+          date: { en: 'January 2025', zh: '2025 年 1 月' } }
+      ]
+    }
+  },
+
+  /* ── 6. 教学 ──────────────────────────────────────────────────────────
      ⚠️ 下面的课程是占位示例，等你真的开课了把内容换掉。
 
      materials 现在每门课只留一行「课程录像」。想加更多就往数组里加：
