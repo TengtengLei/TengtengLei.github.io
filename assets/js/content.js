@@ -140,10 +140,11 @@ window.SITE = {
      type 决定标签颜色：'journal' 期刊 / 'conference' 会议 /
                         'patent' 专利 / 'preprint' 预印本 / 'chapter' 专著章节
 
-     authors: 两种标记 ——
+     authors: 三种标记 ——
               *Tengteng Lei*  用星号包起来 = 高亮（你自己）
               Man Wong^       名字后面加 ^ = 通讯作者（显示成上标 *）
-              两个可以叠加：*Tengteng Lei*^
+              Runxiao Shi#    名字后面加 # = 共同第一作者（显示成上标 †）
+              可以叠加：*Tengteng Lei*#^ = 高亮 + 共一 + 通讯
      venue:   期刊名用星号包起来 *Journal Name*，会自动变斜体。
      doi:     只填 DOI 本身（不要带 https://doi.org/），
               页面上会自动显示成完整链接，单独占一行。没有就留空 ''。
@@ -220,7 +221,7 @@ window.SITE = {
       year: 2024, type: 'journal',
       title: { en: 'Neuromorphic Sensor-Perception Systems for Immersive Displays',
                zh: '面向沉浸式显示的类脑感知系统' },
-      authors: '*Tengteng Lei*, Runxiao Shi, Zong Liu, Yushen Hu, Man Wong',
+      authors: '*Tengteng Lei*#, Runxiao Shi#, Zong Liu, Yushen Hu, Man Wong',
       venue: { en: '*IEEE Open Journal on Immersive Displays*, vol. 1, pp. 20–27.',
                zh: '*IEEE Open Journal on Immersive Displays*，第 1 卷，20–27 页。' },
       doi: '10.1109/OJID.2023.3343309',
@@ -230,9 +231,9 @@ window.SITE = {
       year: 2023, type: 'journal',
       title: { en: 'Low-Temperature Metal-Oxide Thin-Film Transistor Technologies for Implementing Flexible Electronic Circuits and Systems',
                zh: '用于柔性电子电路与系统的低温金属氧化物薄膜晶体管技术' },
-      authors: 'Runxiao Shi, *Tengteng Lei*, Zhihe Xia, Man Wong',
-      venue: { en: '*Journal of Semiconductors*, 44, 091601 — co-first author.',
-               zh: '*Journal of Semiconductors*，44，091601。共同第一作者。' },
+      authors: 'Runxiao Shi#, *Tengteng Lei*#, Zhihe Xia, Man Wong',
+      venue: { en: '*Journal of Semiconductors*, 44, 091601.',
+               zh: '*Journal of Semiconductors*，44，091601。' },
       doi: '10.1088/1674-4926/44/9/091601',
       links: []
     },
