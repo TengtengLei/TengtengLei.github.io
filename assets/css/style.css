@@ -10,14 +10,19 @@
 
 /* ---------- 1. 颜色 ---------- */
 :root {
-  /* 多巴胺六色 —— 想换配色改这里 */
-  --c-pink:   #FF2E88;
-  --c-orange: #FF7A1A;
-  --c-yellow: #FFC93C;
-  --c-green:  #00C08B;
-  --c-blue:   #3D7BFF;
-  --c-purple: #B06BFF;
-  --c-cyan:   #00C2E0;
+  /* 哑光马卡龙八色 —— 想换配色改这里
+     这八个色是在 OKLCH 空间里按「同一感知亮度 L=0.78、同一彩度 C=0.115」
+     生成的，只有色相不同。所以它们看起来一样亮、一样浓，谁都不抢戏。
+     要自己调：改亮度就整组一起改 L，改浓淡就整组一起改 C，
+     单独改某一个会破坏这种均衡感。 */
+  --c-pink:   #F498B2;   /* 柔玫瑰   H 1.7  */
+  --c-orange: #F3A174;   /* 杏       H 48.9 */
+  --c-yellow: #D8B25B;   /* 哑光芥末 H 86.4 */
+  --c-sage:   #A6C571;   /* 鼠尾草绿 H 125.6*/
+  --c-green:  #68CFA5;   /* 薄荷     H 164.8*/
+  --c-cyan:   #4BCAE4;   /* 雾霾蓝   H 214  */
+  --c-blue:   #90B7FF;   /* 长春花蓝 H 262.9*/
+  --c-purple: #C6A5F4;   /* 薰衣草紫 H 302.5*/
 
   /* 基础色 */
   --ink:      #1A1523;
@@ -57,7 +62,7 @@ html[data-page="teaching"]     { --accent: var(--c-green);  }
 html[data-page="media"]        { --accent: var(--c-orange); }
 html[data-page="life"]         { --accent: var(--c-yellow); }
 html[data-page="cv"]           { --accent: var(--c-cyan);   }
-html[data-page="hello"]        { --accent: var(--c-pink);   }
+html[data-page="hello"]        { --accent: var(--c-sage);   }
 
 /* ---------- 2. 基础 ---------- */
 *, *::before, *::after { box-sizing: border-box; }
@@ -98,8 +103,8 @@ a:hover { text-decoration-thickness: 3px; }
 
 /* 背景装饰色块 */
 .blobs { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
-.blob { position: absolute; border-radius: 50%; filter: blur(80px); opacity: .30; }
-html[data-theme="dark"] .blob { opacity: .22; }
+.blob { position: absolute; border-radius: 50%; filter: blur(80px); opacity: .42; }
+html[data-theme="dark"] .blob { opacity: .26; }
 .blob--1 { width: 46vw; height: 46vw; background: var(--accent);   top: -14vw; right: -10vw; transition: background .5s; }
 .blob--2 { width: 34vw; height: 34vw; background: var(--c-yellow); bottom: -12vw; left: -8vw; }
 .blob--3 { width: 26vw; height: 26vw; background: var(--c-cyan);   top: 48%; right: 12%; }
@@ -175,7 +180,7 @@ html[data-theme="dark"] .icon-moon { display: block; }
 .nav a[href="#/teaching"]     { --pill: var(--c-green);  }
 .nav a[href="#/media"]        { --pill: var(--c-orange); }
 .nav a[href="#/life"]         { --pill: var(--c-yellow); }
-.nav a[href="#/hello"]        { --pill: var(--c-pink);   }
+.nav a[href="#/hello"]        { --pill: var(--c-sage);   }
 .nav a:hover { transform: translate(-2px,-2px); box-shadow: 3px 3px 0 var(--shadow); text-decoration: none; }
 .nav a.is-active {
   background: var(--pill); color: #1A1523;
@@ -204,7 +209,7 @@ html[data-theme="dark"] .icon-moon { display: block; }
 }
 .page__title::before {
   content: ""; position: absolute; left: -.12em; right: -.12em; bottom: .1em; height: .3em;
-  background: var(--accent); opacity: .55; border-radius: 8px; z-index: -1;
+  background: var(--accent); opacity: .85; border-radius: 8px; z-index: -1;
   transform: rotate(-1deg);
 }
 .page__lede { color: var(--muted); font-size: 1.1rem; margin: 0; max-width: 60ch; font-weight: 600; }
@@ -251,7 +256,7 @@ html[data-theme="dark"] .icon-moon { display: block; }
 }
 .hero__name::before {
   content: ""; position: absolute; left: -.1em; right: -.1em; bottom: .06em; height: .32em;
-  background: var(--accent); opacity: .6; border-radius: 10px; z-index: -1;
+  background: var(--accent); opacity: .85; border-radius: 10px; z-index: -1;
   transform: rotate(-1.4deg);
 }
 .hero__role {
@@ -392,7 +397,7 @@ html[data-theme="dark"] .icon-moon { display: block; }
    这样不点开也看得出哪个按钮对应哪种标签，又不用加小圆点。 */
 .chip {
   border: var(--bw) solid var(--line);
-  background: color-mix(in srgb, var(--chip) 22%, var(--surface));
+  background: color-mix(in srgb, var(--chip) 38%, var(--surface));
   color: var(--ink);
   font-family: var(--font-display); font-size: .9rem; font-weight: 500; cursor: pointer;
   padding: .3rem 1.05rem; border-radius: 100px; box-shadow: 3px 3px 0 var(--shadow);
@@ -401,12 +406,16 @@ html[data-theme="dark"] .icon-moon { display: block; }
 .chip:hover { transform: translate(-2px,-2px); box-shadow: 5px 5px 0 var(--shadow); }
 .chip.is-active { background: var(--chip); color: #1A1523; }
 
+/* 年份用深色字保证可读，主题色交给后面那道横条去表达 */
 .year-head {
-  font-family: var(--font-display); font-size: 2rem; font-weight: 600;
-  margin: 2.6rem 0 1.1rem; display: flex; align-items: center; gap: .9rem;
-  color: var(--accent); -webkit-text-stroke: 1.5px var(--line);
+  font-family: var(--font-display); font-size: 1.6rem; font-weight: 600;
+  margin: 2.6rem 0 1.1rem; display: flex; align-items: center; gap: 1rem;
+  color: var(--ink);
 }
-.year-head::after { content: ""; flex: 1; height: var(--bw); background: var(--line); opacity: .25; border-radius: 4px; -webkit-text-stroke: 0; }
+.year-head::after {
+  content: ""; flex: 1; height: 8px; border-radius: 100px;
+  background: var(--accent); border: 2px solid var(--line);
+}
 .year-head:first-of-type { margin-top: 0; }
 
 .pub {
@@ -510,7 +519,7 @@ html[data-theme="dark"] .pub__authors .me { color: #1A1523; }
 .video:hover { transform: translate(-3px,-3px); box-shadow: 9px 9px 0 var(--shadow); }
 /* 没有缩略图时（B站）露出的底色，用页面主题色的淡调而不是另起一个颜色 */
 .video__frame { position: relative; aspect-ratio: 16/9;
-  background: color-mix(in srgb, var(--accent) 28%, var(--surface)); cursor: pointer; display: block; width: 100%; border: 0; border-bottom: var(--bw) solid var(--line); padding: 0; overflow: hidden; }
+  background: color-mix(in srgb, var(--accent) 45%, var(--surface)); cursor: pointer; display: block; width: 100%; border: 0; border-bottom: var(--bw) solid var(--line); padding: 0; overflow: hidden; }
 .video__frame img { width: 100%; height: 100%; object-fit: cover; }
 .video__frame iframe { width: 100%; height: 100%; border: 0; display: block; }
 .video__play { position: absolute; inset: 0; display: grid; place-items: center; background: linear-gradient(180deg, rgba(0,0,0,.05), rgba(0,0,0,.35)); }
@@ -645,7 +654,7 @@ html[data-theme="dark"] .pub__authors .me { color: #1A1523; }
 /* ---------- 16. 页脚 ---------- */
 .footer {
   border-top: var(--bw) solid var(--line);
-  background: color-mix(in srgb, var(--accent) 32%, var(--paper));
+  background: color-mix(in srgb, var(--accent) 58%, var(--paper));
   transition: background .4s;
 }
 .footer__inner {
