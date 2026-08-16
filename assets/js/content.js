@@ -139,6 +139,12 @@ window.SITE = {
   },
 
   /* ── 4. 学术发表 ──────────────────────────────────────────────────────
+     ★ 这一节是文件开头那条「每段都写 { en, zh }」规则的唯一例外：
+       title / authors / venue 都只写一个字符串，不写中英两份。
+       学术引用按惯例保持原文 —— 把 *Lab on a Chip* 译成《芯片实验室》
+       没人这么引，反而让人搜不到你的论文。
+       页面框架（标题、筛选按钮、图例）仍然会跟着语言切换。
+
      type 决定标签颜色：'journal' 期刊 / 'conference' 会议 /
                         'patent' 专利 / 'preprint' 预印本 / 'chapter' 专著章节
 
@@ -155,159 +161,128 @@ window.SITE = {
   publications: [
     {
       year: 2026, type: 'preprint',
-      title: { en: 'Event-triggered Implicit Perturbation for Zeroth-Order Optimization of Spiking Transformers',
-               zh: '面向脉冲 Transformer 零阶优化的事件触发隐式扰动' },
+      title: 'Event-triggered Implicit Perturbation for Zeroth-Order Optimization of Spiking Transformers',
       authors: '*Tengteng Lei*, Prabodh Katti, Rashi Dutt, Houssem Sifaou, Tan Peng, Osvaldo Simeone, Kai Xu, Bipin Rajendran',
-      venue: { en: '*IEEE Transactions on Circuits and Systems I* — under review.',
-               zh: '*IEEE Transactions on Circuits and Systems I*，审稿中。' },
+      venue: '*IEEE Transactions on Circuits and Systems I* — under review.',
       links: []
     },
     {
       year: 2026, type: 'preprint',
-      title: { en: 'A Flexible Dual-Gate TFT-Based Tactile Sensor Array with Polarity-Aware Encoding for Neuromorphic Recognition',
-               zh: '基于双栅 TFT、采用极性感知编码的柔性触觉传感器阵列及其类脑识别应用' },
+      title: 'A Flexible Dual-Gate TFT-Based Tactile Sensor Array with Polarity-Aware Encoding for Neuromorphic Recognition',
       authors: '*Tengteng Lei*, Boyi Zhu, Yushen Hu, Tianming Li, Man Wong',
-      venue: { en: '*FlexMat* — major revision.', zh: '*FlexMat*，大修中。' },
+      venue: '*FlexMat* — major revision.',
       links: []
     },
     {
       year: 2026, type: 'journal',
-      title: { en: 'Monolithically Integrated Transimpedance Accumulators for Analog In-Memory Computing Based on Dual-Gate Metal-Oxide Thin-Film Transistors',
-               zh: '基于双栅金属氧化物薄膜晶体管的模拟存内计算单片集成跨阻累加器' },
+      title: 'Monolithically Integrated Transimpedance Accumulators for Analog In-Memory Computing Based on Dual-Gate Metal-Oxide Thin-Film Transistors',
       authors: '*Tengteng Lei*, Jiayi Mao, Yushen Hu, Man Wong',
-      venue: { en: '*IEEE Journal on Emerging and Selected Topics in Circuits and Systems*, vol. 16, no. 2, pp. 607–616.',
-               zh: '*IEEE Journal on Emerging and Selected Topics in Circuits and Systems*，第 16 卷第 2 期，607–616 页。' },
+      venue: '*IEEE Journal on Emerging and Selected Topics in Circuits and Systems*, vol. 16, no. 2, pp. 607–616.',
       doi: '10.1109/jetcas.2026.3688129',
       links: []
     },
     {
       year: 2026, type: 'journal',
-      title: { en: 'An Active-Matrix Digital Microfluidic Device Based on Surfactant-Mediated Electro-Dewetting',
-               zh: '基于表面活性剂介导电润湿的有源矩阵数字微流控器件' },
+      title: 'An Active-Matrix Digital Microfluidic Device Based on Surfactant-Mediated Electro-Dewetting',
       authors: 'Xinying Xie, Qining Leo Wang, Runxiao Shi, *Tengteng Lei*^, Chang-Jin “CJ” Kim, Man Wong',
-      venue: { en: '*Lab on a Chip*, vol. 26, no. 6, pp. 1850–1860.',
-               zh: '*Lab on a Chip*，第 26 卷第 6 期，1850–1860 页。' },
+      venue: '*Lab on a Chip*, vol. 26, no. 6, pp. 1850–1860.',
       doi: '10.1039/d5lc00992h',
       links: []
     },
     {
       year: 2025, type: 'journal',
-      title: { en: 'In-Sensor Computing-Based Smart Sensing Architecture Implemented Using a Dual-Gate Metal-Oxide Thin-Film Transistor Technology',
-               zh: '基于双栅金属氧化物薄膜晶体管工艺的传感器内计算智能感知架构' },
+      title: 'In-Sensor Computing-Based Smart Sensing Architecture Implemented Using a Dual-Gate Metal-Oxide Thin-Film Transistor Technology',
       authors: '*Tengteng Lei*, Yushen Hu, Xinying Xie, Runxiao Shi, Man Wong',
-      venue: { en: '*Advanced Electronic Materials*, vol. 11, no. 9, 2400572.',
-               zh: '*Advanced Electronic Materials*，第 11 卷第 9 期，2400572。' },
+      venue: '*Advanced Electronic Materials*, vol. 11, no. 9, 2400572.',
       doi: '10.1002/aelm.202400572',
       links: []
     },
     {
       year: 2025, type: 'conference',
-      title: { en: 'Accurate Acquisition of Pressure Signals with Optimal Amplitude Using Flexible Tactile Sensor Array',
-               zh: '利用柔性触觉传感器阵列实现最优幅值的压力信号精确采集' },
+      title: 'Accurate Acquisition of Pressure Signals with Optimal Amplitude Using Flexible Tactile Sensor Array',
       authors: '*Tengteng Lei*, Boyi Zhu, Yushen Hu, Man Wong',
-      venue: { en: 'Digest Tech. Papers *Transducers 2025*, Orlando, pp. 1621–1624.',
-               zh: '*Transducers 2025* 论文集，美国奥兰多，1621–1624 页。' },
+      venue: 'Digest Tech. Papers *Transducers 2025*, Orlando, pp. 1621–1624.',
       doi: '10.1109/transducers61432.2025.11109844',
       links: []
     },
     {
       year: 2024, type: 'journal',
-      title: { en: 'A Sliding-Kernel Computation-in-Memory Architecture for Convolutional Neural Networks',
-               zh: '面向卷积神经网络的滑动核存内计算架构' },
+      title: 'A Sliding-Kernel Computation-in-Memory Architecture for Convolutional Neural Networks',
       authors: 'Yushen Hu, Xinying Xie, *Tengteng Lei*^, Runxiao Shi, Man Wong',
-      venue: { en: '*Advanced Science*, vol. 11, no. 46, 2407440.',
-               zh: '*Advanced Science*，第 11 卷第 46 期，2407440。' },
+      venue: '*Advanced Science*, vol. 11, no. 46, 2407440.',
       doi: '10.1002/advs.202407440',
       links: []
     },
     {
       year: 2024, type: 'journal',
-      title: { en: 'Neuromorphic Sensor-Perception Systems for Immersive Displays',
-               zh: '面向沉浸式显示的类脑感知系统' },
+      title: 'Neuromorphic Sensor-Perception Systems for Immersive Displays',
       authors: '*Tengteng Lei*#, Runxiao Shi#, Zong Liu, Yushen Hu, Man Wong',
-      venue: { en: '*IEEE Open Journal on Immersive Displays*, vol. 1, pp. 20–27.',
-               zh: '*IEEE Open Journal on Immersive Displays*，第 1 卷，20–27 页。' },
+      venue: '*IEEE Open Journal on Immersive Displays*, vol. 1, pp. 20–27.',
       doi: '10.1109/OJID.2023.3343309',
       links: []
     },
     {
       year: 2023, type: 'journal',
-      title: { en: 'Low-Temperature Metal-Oxide Thin-Film Transistor Technologies for Implementing Flexible Electronic Circuits and Systems',
-               zh: '用于柔性电子电路与系统的低温金属氧化物薄膜晶体管技术' },
+      title: 'Low-Temperature Metal-Oxide Thin-Film Transistor Technologies for Implementing Flexible Electronic Circuits and Systems',
       authors: 'Runxiao Shi#, *Tengteng Lei*#, Zhihe Xia, Man Wong',
-      venue: { en: '*Journal of Semiconductors*, 44, 091601.',
-               zh: '*Journal of Semiconductors*，44，091601。' },
+      venue: '*Journal of Semiconductors*, 44, 091601.',
       doi: '10.1088/1674-4926/44/9/091601',
       links: []
     },
     {
       year: 2023, type: 'conference',
-      title: { en: 'An Active-Matrix Piezoelectric Tactile Sensor Array with In-Pixel Amplifier and Non-Uniformity Compensation',
-               zh: '带像素内放大与非均匀性补偿的有源矩阵压电触觉传感器阵列' },
+      title: 'An Active-Matrix Piezoelectric Tactile Sensor Array with In-Pixel Amplifier and Non-Uniformity Compensation',
       authors: '*Tengteng Lei*, Yushen Hu, Xinying Xie, Man Wong',
-      venue: { en: 'Digest Tech. Papers *Transducers 2023*, Kyoto, pp. 298–301.',
-               zh: '*Transducers 2023* 论文集，日本京都，298–301 页。' },
+      venue: 'Digest Tech. Papers *Transducers 2023*, Kyoto, pp. 298–301.',
       // Crossref 里查不到这篇的 DOI，退而用 IEEE Xplore 页面链接
       url: 'https://ieeexplore.ieee.org/document/10517256',
       links: []
     },
     {
       year: 2023, type: 'conference',
-      title: { en: 'A Tactile Sensor Array with a Monolithically Integrated Neural Network for Edge Computation',
-               zh: '单片集成神经网络的触觉传感器阵列及其边缘计算应用' },
+      title: 'A Tactile Sensor Array with a Monolithically Integrated Neural Network for Edge Computation',
       authors: '*Tengteng Lei*, Yushen Hu, Man Wong',
-      venue: { en: 'Digest Tech. Papers *MEMS 2023*, Munich, pp. 13–16.',
-               zh: '*MEMS 2023* 论文集，德国慕尼黑，13–16 页。' },
+      venue: 'Digest Tech. Papers *MEMS 2023*, Munich, pp. 13–16.',
       doi: '10.1109/mems49605.2023.10052560',
       links: []
     },
     {
       year: 2022, type: 'journal',
-      title: { en: 'A Comparative Study on Inverters Built with Dual-Gate Thin-Film Transistors Based on Intrinsically Depletion- or Enhancement-Mode Technologies',
-               zh: '本征耗尽型与增强型双栅薄膜晶体管反相器的对比研究' },
+      title: 'A Comparative Study on Inverters Built with Dual-Gate Thin-Film Transistors Based on Intrinsically Depletion- or Enhancement-Mode Technologies',
       authors: '*Tengteng Lei*, Runxiao Shi, Yuqi Wang, Zhihe Xia, Man Wong',
-      venue: { en: '*IEEE Transactions on Electron Devices*, vol. 69, no. 8, pp. 3186–3191.',
-               zh: '*IEEE Transactions on Electron Devices*，第 69 卷第 8 期，3186–3191 页。' },
+      venue: '*IEEE Transactions on Electron Devices*, vol. 69, no. 8, pp. 3186–3191.',
       doi: '10.1109/ted.2022.3167940',
       links: []
     },
     {
       year: 2022, type: 'conference',
-      title: { en: 'Active-Matrix Tactile Sensor Array Based on the Monolithic Integration of PVDF and Dual-Gate Transistors',
-               zh: '基于 PVDF 与双栅晶体管单片集成的有源矩阵触觉传感器阵列' },
+      title: 'Active-Matrix Tactile Sensor Array Based on the Monolithic Integration of PVDF and Dual-Gate Transistors',
       authors: '*Tengteng Lei*, Yushen Hu, Man Wong',
-      venue: { en: 'Digest Tech. Papers *MEMS 2022*, Tokyo, pp. 71–74.',
-               zh: '*MEMS 2022* 论文集，日本东京，71–74 页。' },
+      venue: 'Digest Tech. Papers *MEMS 2022*, Tokyo, pp. 71–74.',
       doi: '10.1109/mems51670.2022.9699743',
       links: []
     },
     {
       year: 2020, type: 'conference',
-      title: { en: 'A Robust a-IGZO TFT Integrated Scan/Emission Driver with Dynamic Inverter for AMOLED Display',
-               zh: '面向 AMOLED 显示、采用动态反相器的高鲁棒性 a-IGZO TFT 集成扫描/发光驱动电路' },
+      title: 'A Robust a-IGZO TFT Integrated Scan/Emission Driver with Dynamic Inverter for AMOLED Display',
       authors: '*Tengteng Lei*, Congwei Liao, Jie Huang, Shengdong Zhang',
-      venue: { en: '*SID Symposium Digest of Technical Papers*, 51(1), pp. 1354–1357.',
-               zh: '*SID Symposium Digest of Technical Papers*，51(1)，1354–1357 页。' },
+      venue: '*SID Symposium Digest of Technical Papers*, 51(1), pp. 1354–1357.',
       doi: '10.1002/sdtp.14135',
       links: []
     },
     {
       year: 2019, type: 'conference',
-      title: { en: 'Oxide Thin Film Transistors Integrated DC-DC Converter with High Efficiency for Passive RFID Tag',
-               zh: '面向无源 RFID 标签的氧化物薄膜晶体管集成高效率 DC-DC 变换器' },
+      title: 'Oxide Thin Film Transistors Integrated DC-DC Converter with High Efficiency for Passive RFID Tag',
       authors: '*Tengteng Lei*, Congwei Liao, Jie Huang, Jiwen Yang, Shengdong Zhang',
-      venue: { en: '*SID Symposium Digest of Technical Papers*, 50(1), pp. 1660–1663.',
-               zh: '*SID Symposium Digest of Technical Papers*，50(1)，1660–1663 页。' },
+      venue: '*SID Symposium Digest of Technical Papers*, 50(1), pp. 1660–1663.',
       doi: '10.1002/sdtp.13269',
       links: []
     },
     {
       year: 2018, type: 'conference',
-      title: { en: 'An a-InGaZnO TFT Gate Driver Circuit with Positive Feedback Effect',
-               zh: '具有正反馈效应的 a-InGaZnO TFT 栅极驱动电路' },
+      title: 'An a-InGaZnO TFT Gate Driver Circuit with Positive Feedback Effect',
       authors: '*Tengteng Lei*, Congwei Liao, Jie Huang, Ying Wang, Shengdong Zhang',
-      venue: { en: '*International Conference on CAD-TFT*.',
-               zh: '*International Conference on CAD-TFT*。' },
+      venue: '*International Conference on CAD-TFT*.',
       doi: '10.1109/CAD-TFT.2018.8608053',
       links: []
     },
@@ -318,42 +293,37 @@ window.SITE = {
        ─────────────────────────────────────────────────────────────── */
     {
       year: 2025, type: 'patent',
-      title: { en: 'A Hysteresis Comparator Implemented Using Dual-Gate Thin-Film Transistors',
-               zh: '一种基于双栅薄膜晶体管的迟滞比较器' },
+      title: 'A Hysteresis Comparator Implemented Using Dual-Gate Thin-Film Transistors',
       authors: '*Tengteng Lei*, Man Wong',
-      venue: { en: 'Chinese patent CN120512123A.', zh: '中国发明专利 CN120512123A。' },
+      venue: 'Chinese patent CN120512123A.',
       links: []
     },
     {
       year: 2023, type: 'patent',
-      title: { en: 'A Dynamic Offset-Cancellation Circuit Based on Dual-Gate Thin-Film Transistors',
-               zh: '一种基于双栅薄膜晶体管的动态失调消除电路' },
+      title: 'A Dynamic Offset-Cancellation Circuit Based on Dual-Gate Thin-Film Transistors',
       authors: 'Xuchi Liu, *Tengteng Lei*, Man Wong',
-      venue: { en: 'Chinese patent CN116800209A.', zh: '中国发明专利 CN116800209A。' },
+      venue: 'Chinese patent CN116800209A.',
       links: []
     },
     {
       year: 2022, type: 'patent',
-      title: { en: 'A High-Speed Gate Driving Unit and Circuit', zh: '一种高速栅极驱动单元及电路' },
+      title: 'A High-Speed Gate Driving Unit and Circuit',
       authors: 'Shengdong Zhang, *Tengteng Lei*, Congwei Liao, Jie Huang',
-      venue: { en: 'Chinese patent CN109859669B — granted 2 September 2022.',
-               zh: '中国发明专利 CN109859669B，2022 年 9 月 2 日授权。' },
+      venue: 'Chinese patent CN109859669B — granted 2 September 2022.',
       links: []
     },
     {
       year: 2022, type: 'patent',
-      title: { en: 'Voltage Converter and Radio Frequency Identification Device', zh: '电压变换器及射频识别装置' },
+      title: 'Voltage Converter and Radio Frequency Identification Device',
       authors: 'Shengdong Zhang, *Tengteng Lei*, Congwei Liao, Jie Huang',
-      venue: { en: 'Chinese patent CN109492740B — granted 1 March 2022.',
-               zh: '中国发明专利 CN109492740B，2022 年 3 月 1 日授权。' },
+      venue: 'Chinese patent CN109492740B — granted 1 March 2022.',
       links: []
     },
     {
       year: 2020, type: 'patent',
-      title: { en: 'Shift Register Unit, Gate Drive Circuit and Display Device', zh: '移位寄存器单元、栅极驱动电路及显示装置' },
+      title: 'Shift Register Unit, Gate Drive Circuit and Display Device',
       authors: 'Shengdong Zhang, *Tengteng Lei*, Congwei Liao, Jie Huang',
-      venue: { en: 'Chinese patent CN109285505B — granted 23 June 2020.',
-               zh: '中国发明专利 CN109285505B，2020 年 6 月 23 日授权。' },
+      venue: 'Chinese patent CN109285505B — granted 23 June 2020.',
       links: []
     }
   ],
