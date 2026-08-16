@@ -237,7 +237,7 @@ html[data-theme="dark"] .icon-moon { display: block; }
 }
 
 /* ---------- 7. 首页 hero ---------- */
-.hero { display: grid; grid-template-columns: 360px 1fr; gap: 2.8rem; align-items: start; }
+.hero { display: grid; grid-template-columns: 360px 1fr; gap: 4.2rem; align-items: start; }
 @media (max-width: 860px) { .hero { grid-template-columns: 1fr; gap: 1.8rem; } }
 
 /* 3:4 竖版。源图（assets/img/profile.jpg）也是 3:4，所以完整显示、不裁切。
@@ -271,14 +271,13 @@ html[data-theme="dark"] .icon-moon { display: block; }
   background: var(--accent); opacity: .85; border-radius: 10px; z-index: -1;
   transform: rotate(-1.4deg);
 }
-/* 中性白底而不是彩色：名字上方已经有一道主题色高亮，
-   紧挨着再来一个彩色药丸会让首屏色块过密。摆正，不旋转。 */
+/* 职位用纯文字，不做成药丸。
+   这个站上所有药丸都是可点的（导航、筛选、链接），
+   做一个不可点的药丸会诱导人去点它。层级交给字号和字重：
+   姓名（62px）→ 职位（22px 深色）→ 单位（17px 灰色）。 */
 .hero__role {
-  display: inline-block; font-family: var(--font-display); font-size: 1.05rem; font-weight: 500;
-  background: var(--surface); color: var(--ink);
-  border: var(--bw) solid var(--line); border-radius: 100px;
-  padding: .16rem .95rem; margin: 0 0 .7rem;
-  box-shadow: 3px 3px 0 var(--shadow);
+  font-family: var(--font-display); font-size: 1.38rem; font-weight: 500;
+  color: var(--ink); margin: 0 0 .2rem; letter-spacing: -.01em;
 }
 .hero__affil { color: var(--muted); margin: 0 0 1.3rem; font-weight: 700; }
 .hero__bio { margin: 0 0 1.6rem; max-width: 58ch; }
