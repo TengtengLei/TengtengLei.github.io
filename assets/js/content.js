@@ -708,8 +708,8 @@ window.SITE = {
       zh: '不用注册，留个名字或者完全匿名都可以。留言会立刻显示出来，不友善的内容我会删掉。'
     },
     supabase: {
-      url:     '',   // 'https://xxxxxxxxxxxx.supabase.co'
-      anonKey: ''    // 'sb_publishable_xxxxxxxx……'
+      url:     'https://hfuaahhigbqpfgamasyp.supabase.co',
+      anonKey: 'sb_publishable_n4NtUaTwUorWQeqJFC0Amg_n_1vXmsX'
     }
   },
 
