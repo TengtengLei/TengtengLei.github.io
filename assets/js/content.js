@@ -494,13 +494,6 @@ window.SITE = {
         }
       },
       {
-        q: { en: 'Do you have funding?', zh: '有经费吗？' },
-        a: {
-          en: '⚠️ Update this with what is actually available and link the relevant scholarship pages. Revisit it whenever the situation changes.',
-          zh: '⚠️ 请填写目前实际有的名额，并附上相关奖学金页面链接。情况变了记得回来改。'
-        }
-      },
-      {
         q: { en: 'Can you write me a reference letter?', zh: '可以帮我写推荐信吗？' },
         a: {
           en: 'I write letters for students I have taught or supervised directly. Please give me at least three weeks, your CV, and a short note on what the letter is for — a letter written in a hurry helps nobody.',
