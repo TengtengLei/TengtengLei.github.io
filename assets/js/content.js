@@ -703,10 +703,9 @@ window.SITE = {
       en: 'Say hello, ask a question, or tell me I am wrong about something. I read everything.',
       zh: '打个招呼、问个问题，或者告诉我哪里说错了。我都会看。'
     },
-    note: {
-      en: 'No sign-up, anonymous is welcome. Even just passing through to say hello.',
-      zh: '不用注册，匿名也欢迎。哪怕只是路过来说声你好。'
-    },
+    // 表单上方的小字提示。空着就不显示 —— 表单本身已经够清楚了。
+    // 哪天想加一句（比如「暑假期间回复会慢一些」），填进来就会自动出现。
+    note: { en: '', zh: '' },
     supabase: {
       url:     'https://hfuaahhigbqpfgamasyp.supabase.co',
       anonKey: 'sb_publishable_n4NtUaTwUorWQeqJFC0Amg_n_1vXmsX'
