@@ -185,7 +185,8 @@ window.SITE = {
       title: { en: 'An Active-Matrix Digital Microfluidic Device Based on Surfactant-Mediated Electro-Dewetting',
                zh: '基于表面活性剂介导电润湿的有源矩阵数字微流控器件' },
       authors: 'Xinying Xie, Qining Leo Wang, Runxiao Shi, *Tengteng Lei*^, Chang-Jin “CJ” Kim, Man Wong',
-      venue: { en: '*Lab on a Chip*.', zh: '*Lab on a Chip*。' },
+      venue: { en: '*Lab on a Chip*, vol. 26, no. 6, pp. 1850–1860.',
+               zh: '*Lab on a Chip*，第 26 卷第 6 期，1850–1860 页。' },
       doi: '10.1039/d5lc00992h',
       links: []
     },
