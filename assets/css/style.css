@@ -262,11 +262,13 @@ html[data-theme="dark"] .icon-moon { display: block; }
   background: var(--accent); opacity: .85; border-radius: 10px; z-index: -1;
   transform: rotate(-1.4deg);
 }
+/* 中性白底而不是彩色：名字上方已经有一道主题色高亮，
+   紧挨着再来一个彩色药丸会让首屏色块过密。摆正，不旋转。 */
 .hero__role {
   display: inline-block; font-family: var(--font-display); font-size: 1.05rem; font-weight: 500;
-  background: var(--c-yellow); color: #1A1523;
+  background: var(--surface); color: var(--ink);
   border: var(--bw) solid var(--line); border-radius: 100px;
-  padding: .16rem .9rem; margin: 0 0 .6rem; transform: rotate(-1.5deg);
+  padding: .16rem .95rem; margin: 0 0 .7rem;
   box-shadow: 3px 3px 0 var(--shadow);
 }
 .hero__affil { color: var(--muted); margin: 0 0 1.3rem; font-weight: 700; }
@@ -748,6 +750,13 @@ ul.cvspine { list-style: none; margin: 0; }
 .deflist { display: grid; grid-template-columns: 130px 1fr; gap: .7rem 1.3rem; margin: 0; }
 .deflist dt { font-family: var(--font-display); font-weight: 500; color: var(--muted); }
 .deflist dd { margin: 0; font-weight: 700; }
+/* 邮箱不加下划线 —— 「Email」标签已经说明了它们是什么。
+   移上去时下划线出现，保留可点击的提示。 */
+.deflist dd a { text-decoration: none; }
+.deflist dd a:hover {
+  text-decoration: underline; text-decoration-thickness: 2px;
+  text-decoration-color: var(--accent); text-underline-offset: 3px;
+}
 @media (max-width: 560px) { .deflist { grid-template-columns: 1fr; gap: .1rem 0; } .deflist dd { margin-bottom: .8rem; } }
 
 /* ---------- 16. 页脚 ---------- */
