@@ -54,8 +54,8 @@
                    zh: '留言板还没开通。打开 content.js 第 8 节，按里面的步骤配置一下就能用（大约三分钟）。' }
     },
     lede: {
-      publications: { en: 'Peer-reviewed articles, conference papers, patents and preprints. <sup class="corr">†</sup> equal contribution, <sup class="corr">*</sup> corresponding author. Please email me if you cannot access a PDF.',
-                      zh: '同行评议论文、会议论文、专利与预印本。<sup class="corr">†</sup> 共同第一作者，<sup class="corr">*</sup> 通讯作者。如果某篇拿不到全文，欢迎发邮件向我索取。' },
+      publications: { en: '<sup class="corr">†</sup> equal contribution &nbsp;·&nbsp; <sup class="corr">*</sup> corresponding author',
+                      zh: '<sup class="corr">†</sup> 共同第一作者 &nbsp;·&nbsp; <sup class="corr">*</sup> 通讯作者' },
       cv:           { en: 'Education, appointments, funding and service. A full PDF version is available below.',
                       zh: '教育背景、任职经历、基金与学术服务。完整版简历可在下方下载。' }
     }
