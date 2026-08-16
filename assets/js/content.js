@@ -704,8 +704,8 @@ window.SITE = {
       zh: '打个招呼、问个问题，或者告诉我哪里说错了。我都会看。'
     },
     note: {
-      en: 'No account needed — leave a name or stay anonymous, either is fine. Messages appear straight away, and I can remove anything unkind.',
-      zh: '不用注册，留个名字或者完全匿名都可以。留言会立刻显示出来，不友善的内容我会删掉。'
+      en: 'No sign-up, anonymous is welcome. Even just passing through to say hello.',
+      zh: '不用注册，匿名也欢迎。哪怕只是路过来说声你好。'
     },
     supabase: {
       url:     'https://hfuaahhigbqpfgamasyp.supabase.co',
