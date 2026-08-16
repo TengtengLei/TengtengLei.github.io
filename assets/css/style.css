@@ -383,14 +383,30 @@ html[data-theme="dark"] .icon-moon { display: block; }
 
 /* ---------- 10. 论文列表 ---------- */
 .pub-filters { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 2rem; }
+/* 筛选按钮的颜色和论文标签一一对应，
+   要改配色的话，这里和下面 .badge--* 必须一起改。 */
+.chip[data-filter="journal"]    { --chip: var(--c-green);  }
+.chip[data-filter="conference"] { --chip: var(--c-blue);   }
+.chip[data-filter="preprint"]   { --chip: var(--c-orange); }
+.chip[data-filter="chapter"]    { --chip: var(--c-cyan);   }
+.chip[data-filter="all"]        { --chip: var(--accent);   }
+
 .chip {
+  display: inline-flex; align-items: center; gap: .5rem;
   border: var(--bw) solid var(--line); background: var(--surface); color: var(--ink);
   font-family: var(--font-display); font-size: .9rem; font-weight: 500; cursor: pointer;
   padding: .3rem .95rem; border-radius: 100px; box-shadow: 3px 3px 0 var(--shadow);
   transition: transform .14s, box-shadow .14s, background .14s, color .14s;
 }
+/* 未选中时用一颗小色点标明它对应哪种标签 */
+.chip::before {
+  content: ""; flex: none; width: 11px; height: 11px; border-radius: 50%;
+  border: 2px solid var(--line); background: var(--chip);
+}
+.chip[data-filter="all"]::before { display: none; }
 .chip:hover { transform: translate(-2px,-2px); box-shadow: 5px 5px 0 var(--shadow); }
-.chip.is-active { background: var(--accent); color: #1A1523; }
+.chip.is-active { background: var(--chip); color: #1A1523; }
+.chip.is-active::before { background: var(--surface); }
 
 .year-head {
   font-family: var(--font-display); font-size: 2rem; font-weight: 600;
@@ -432,10 +448,11 @@ html[data-theme="dark"] .pub__authors .me { color: #1A1523; }
   padding: .05rem .55rem; border-radius: 100px; border: 2px solid var(--line);
   vertical-align: 3px; margin-left: .5rem; color: #1A1523;
 }
+/* 必须和上面 .chip[data-filter="…"] 的颜色保持一致 */
 .badge--journal    { background: var(--c-green);  }
-.badge--conference { background: var(--c-blue);   color: #1A1523; }
+.badge--conference { background: var(--c-blue);   }
 .badge--preprint   { background: var(--c-orange); }
-.badge--chapter    { background: var(--c-purple); color: #1A1523; }
+.badge--chapter    { background: var(--c-cyan);   }
 
 /* ---------- 11. 教学 ---------- */
 .course { border: var(--bw) solid var(--line); border-radius: var(--r); background: var(--surface); padding: 1.6rem 1.7rem; box-shadow: 6px 6px 0 var(--shadow); }
