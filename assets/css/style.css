@@ -240,8 +240,11 @@ html[data-theme="dark"] .icon-moon { display: block; }
 .hero { display: grid; grid-template-columns: 360px 1fr; gap: 2.8rem; align-items: start; }
 @media (max-width: 860px) { .hero { grid-template-columns: 1fr; gap: 1.8rem; } }
 
+/* 3:4 竖版。源图（assets/img/profile.jpg）也是 3:4，所以完整显示、不裁切。
+   换成别的比例的照片时，object-fit: cover 会自动居中裁切；
+   想让画面偏上或偏下，加一行 object-position: center 30%; 之类即可。 */
 .hero__photo {
-  width: 360px; height: 360px; object-fit: cover;
+  width: 360px; height: 480px; object-fit: cover;
   border: var(--bw) solid var(--line); border-radius: 26px;
   box-shadow: 8px 8px 0 var(--accent);
   background: var(--surface);
@@ -251,7 +254,7 @@ html[data-theme="dark"] .icon-moon { display: block; }
 .hero__photo:hover { transform: rotate(1.5deg) scale(1.02); }
 /* 断点要和上面 .hero 折叠成单栏的断点一致，否则中间那段宽度会出现
    「单栏布局 + 超大照片」的怪状态 */
-@media (max-width: 860px) { .hero__photo { width: 200px; height: 200px; } }
+@media (max-width: 860px) { .hero__photo { width: 210px; height: 280px; } }
 
 .hero__name {
   font-family: var(--font-display); font-weight: 600;
