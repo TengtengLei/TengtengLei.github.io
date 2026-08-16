@@ -702,7 +702,8 @@
     var body = bodyEl.value.trim();
     var who  = (nameEl ? nameEl.value : '').trim();
 
-    if (!body)             { gbSay(t(G.errEmpty), 'bad'); return; }
+    // 少于两个字数据库那边也会拒，前端先拦下来，好给一句人话
+    if (body.length < 2)   { gbSay(t(G.errEmpty), 'bad'); return; }
     if (body.length > 800) { gbSay(t(G.errLong),  'bad'); return; }
     if (/(https?:\/\/|www\.)/i.test(body + ' ' + who)) { gbSay(t(G.errLink), 'bad'); return; }
     if (Date.now() - gbOpenedAt < GB_MINTIME) { gbSay(t(G.errSlow), 'bad'); return; }

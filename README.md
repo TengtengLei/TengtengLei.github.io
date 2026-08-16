@@ -190,55 +190,15 @@ Supabase 免费额度对个人主页来说绰绰有余，不用绑卡。
 
 **第二步：建留言表**
 
-左侧点 `SQL Editor` → `New query` → 把下面**整段**贴进去 → 点 `Run`。
-看到 `Success` 就成了。
+用记事本（或者任何编辑器）打开仓库根目录的 **`guestbook-setup.sql`**，
+`Ctrl+A` 全选、`Ctrl+C` 复制。
 
-```sql
--- 留言表
-create table public.messages (
-  id         bigint generated always as identity primary key,
-  created_at timestamptz not null default now(),
-  name       text    not null default '',
-  body       text    not null,
-  is_hidden  boolean not null default false,
-  constraint body_len check (char_length(body) between 2 and 800),
-  constraint name_len check (char_length(name) <= 40),
-  -- 禁止链接：广告机器人来这儿就是为了留链接，堵死这条它们就没兴趣了
-  constraint no_links check (
-    body !~* '(https?://|www\.|\[url)' and name !~* '(https?://|www\.)'
-  )
-);
+回到 Supabase，左侧点 `SQL Editor` → `New query` → 粘进去 → 点 `Run`。
+看到 `Success` 就成了。这段只需要跑一次。
 
-create index messages_recent on public.messages (created_at desc);
-
--- 限流：全站一分钟最多 5 条。正常人写一条不会碰到，机器人狂刷会被挡住。
-create or replace function public.messages_rate_limit()
-returns trigger language plpgsql as $$
-begin
-  if (select count(*) from public.messages
-      where created_at > now() - interval '1 minute') >= 5 then
-    raise exception 'rate limit exceeded';
-  end if;
-  return new;
-end;
-$$;
-
-create trigger messages_rate_limit_trg
-  before insert on public.messages
-  for each row execute function public.messages_rate_limit();
-
--- 权限：任何人能读没被隐藏的留言、能写一条；
--- 但谁都不能改、不能删（没写 update / delete 策略就等于禁止）。
-alter table public.messages enable row level security;
-
-create policy "anyone can read visible messages"
-  on public.messages for select to anon
-  using (is_hidden = false);
-
-create policy "anyone can post"
-  on public.messages for insert to anon
-  with check (is_hidden = false);
-```
+> 别从这个 README 里复制 SQL —— 很容易连带把 markdown 的围栏符号
+> （三个反引号）一起选中，SQL 编辑器不认识它，会报
+> `syntax error at or near "```"`。用那个 `.sql` 文件就不会有这个问题。
 
 **第三步：把两个值填进网页**
 
