@@ -171,25 +171,107 @@ git add . && git commit -m "Update publications" && git push
   图片放 `assets/img/`，不填就只显示 emoji
 - **推荐**：分组自动换色，`url` 留空就不加链接
 
-### 留言板
+### 开通留言板
 
-留言用 **giscus** —— 它把留言存在你 GitHub 仓库的 Discussions 里，
-不需要服务器、不需要数据库、不花钱，而且因为要 GitHub 账号才能发言，
-基本不会有垃圾留言。
+留言板是**完全匿名**的：任何人打开页面就能写，不用注册、不用登录，
+写完立刻显示出来。
 
-网站发布之后配置，三分钟：
+留言存在 **Supabase**（一个免费的在线数据库）里。为什么需要它：
+GitHub Pages 只会把文件发给访客，**不能存东西**，所以留言必须有个地方放。
+Supabase 免费额度对个人主页来说绰绰有余，不用绑卡。
 
-1. 仓库 `Settings` → `General` → 往下找到 Features，勾选 **Discussions**
-2. 打开 <https://giscus.app>，在「仓库」一栏填 `你的用户名/你的用户名.github.io`
-3. 页面会提示你装一下 giscus app，装完往下拉，会生成一段代码，
-   里面有 `data-repo-id` 和 `data-category-id` 两个值
-4. 把仓库名、分类名和那两个 id 填进 `content.js` 的 `guestbook.giscus`
+一次性配置，大约十分钟。
 
-配好之前，留言板那一页会显示「还没开通」，不影响其他页面。
+**第一步：建数据库**
 
-> **注意**：访客需要有 GitHub 账号才能留言。如果你的科普受众主要在国内、
-> 大多没有 GitHub，告诉我一声,我可以换成 **Waline**（不用登录就能留言,
-> 但需要额外部署一个免费后端）。
+1. 打开 <https://supabase.com>，用 GitHub 账号登录
+2. `New project` → 名字随便起（比如 `homepage`）→ 地区选 **West EU (London)** →
+   设一个数据库密码（存到密码管理器里，平时用不到）→ 创建，等两分钟
+
+**第二步：建留言表**
+
+左侧点 `SQL Editor` → `New query` → 把下面**整段**贴进去 → 点 `Run`。
+看到 `Success` 就成了。
+
+```sql
+-- 留言表
+create table public.messages (
+  id         bigint generated always as identity primary key,
+  created_at timestamptz not null default now(),
+  name       text    not null default '',
+  body       text    not null,
+  is_hidden  boolean not null default false,
+  constraint body_len check (char_length(body) between 2 and 800),
+  constraint name_len check (char_length(name) <= 40),
+  -- 禁止链接：广告机器人来这儿就是为了留链接，堵死这条它们就没兴趣了
+  constraint no_links check (
+    body !~* '(https?://|www\.|\[url)' and name !~* '(https?://|www\.)'
+  )
+);
+
+create index messages_recent on public.messages (created_at desc);
+
+-- 限流：全站一分钟最多 5 条。正常人写一条不会碰到，机器人狂刷会被挡住。
+create or replace function public.messages_rate_limit()
+returns trigger language plpgsql as $$
+begin
+  if (select count(*) from public.messages
+      where created_at > now() - interval '1 minute') >= 5 then
+    raise exception 'rate limit exceeded';
+  end if;
+  return new;
+end;
+$$;
+
+create trigger messages_rate_limit_trg
+  before insert on public.messages
+  for each row execute function public.messages_rate_limit();
+
+-- 权限：任何人能读没被隐藏的留言、能写一条；
+-- 但谁都不能改、不能删（没写 update / delete 策略就等于禁止）。
+alter table public.messages enable row level security;
+
+create policy "anyone can read visible messages"
+  on public.messages for select to anon
+  using (is_hidden = false);
+
+create policy "anyone can post"
+  on public.messages for insert to anon
+  with check (is_hidden = false);
+```
+
+**第三步：把两个值填进网页**
+
+左侧 `Project Settings` → `API`，复制这两个值到 `content.js` 第 8 节：
+
+| Supabase 里叫什么 | 填到 `guestbook.supabase` 的 | 长什么样 |
+|---|---|---|
+| Project URL | `url` | `https://abcdefgh.supabase.co` |
+| `anon` `public` key | `anonKey` | `eyJhbGciOi……` 很长一串 |
+
+存盘、推到 GitHub，留言板就活了。配好之前那一页显示「还没开通」，
+不影响其他页面。
+
+> **那串 key 公开在仓库里，安全吗？** 安全。它叫 `anon`（匿名）`public`（公开）
+> 就是因为它本来就是给浏览器用的，Supabase 的设计就是让你把它写进前端代码。
+> 真正管事的是上面那段 SQL 里的权限规则。**另一个** `service_role` key 才是
+> 万能钥匙，那个千万不能贴出来 —— 你用不到它。
+
+### 管理留言
+
+有人留了不合适的内容，去 <https://supabase.com> → 你的项目 →
+左侧 `Table Editor` → `messages` 表：
+
+- **想藏起来**：把那一行的 `is_hidden` 勾上 → 网页上立刻消失，记录还在
+- **想彻底删掉**：选中那一行 → `Delete row`
+
+网页那边一共有四道防机器人的措施，不用你管：表单里藏了一个诱饵输入框、
+打开页面不满 3 秒不让发、同一个浏览器一分钟只能发一条、
+数据库端禁链接并且全站限流。
+
+真被刷疯了的话，最快的止血办法是去 `SQL Editor` 跑一句
+`drop policy "anyone can post" on public.messages;` —— 留言板立刻变成只读，
+已有的留言照常显示，等你处理完再把那条策略加回来。
 
 ---
 

@@ -50,8 +50,33 @@
       office:    { en: 'Office',         zh: '办公室'   },
       address:   { en: 'Address',        zh: '地址'     },
       empty:     { en: 'Nothing here yet — content coming soon.', zh: '这一块还没有内容，稍后补充。' },
-      guestSetup:{ en: 'The guestbook is not switched on yet. See section 8 of content.js for the three-minute setup.',
-                   zh: '留言板还没开通。打开 content.js 第 8 节，按里面的步骤配置一下就能用（大约三分钟）。' }
+      guestSetup:{ en: 'The guestbook is not switched on yet. See section 8 of content.js and the README for the ten-minute setup.',
+                   zh: '留言板还没开通。打开 content.js 第 8 节，照 README 里「开通留言板」那一节走一遍就能用（大约十分钟）。' }
+    },
+    guest: {
+      name:     { en: 'Name (optional)',  zh: '名字（可不填）' },
+      anon:     { en: 'Anonymous',        zh: '匿名' },
+      body:     { en: 'Your message',     zh: '想说的话' },
+      hint:     { en: 'Say hi, ask something, leave a note…', zh: '打个招呼，问点什么，随便写写……' },
+      send:     { en: 'Leave a message',  zh: '发表留言' },
+      sending:  { en: 'Sending…',         zh: '发送中……' },
+      thanks:   { en: 'Thank you — your message is up.', zh: '谢谢你，留言已经发出来了。' },
+      loading:  { en: 'Loading messages…', zh: '正在载入留言……' },
+      none:     { en: 'No messages yet. Be the first!', zh: '还没有人留言，来当第一个吧！' },
+      count:    { en: 'message(s)',       zh: '条留言' },
+      // 出错提示
+      errEmpty: { en: 'Please write something first.', zh: '还没写内容呢。' },
+      errLong:  { en: 'That is a bit too long — please keep it under 800 characters.',
+                  zh: '有点太长了，控制在 800 字以内吧。' },
+      errLink:  { en: 'Links are not allowed here (it keeps the spam bots away). Please remove the URL.',
+                  zh: '这里不能放链接（防广告机器人）。把网址去掉就可以发了。' },
+      errSlow:  { en: 'Just a moment — please take a few seconds to write.', zh: '稍等一下，慢慢写。' },
+      errWait:  { en: 'You just posted. Please wait a minute before posting again.',
+                  zh: '你刚刚发过了，等一分钟再发下一条吧。' },
+      errBusy:  { en: 'The guestbook is busy right now. Please try again in a minute.',
+                  zh: '留言板现在有点忙，过一分钟再试试。' },
+      errNet:   { en: 'Could not reach the guestbook. Please check your connection and try again.',
+                  zh: '连不上留言板。检查一下网络再试一次。' }
     },
     lede: {
       publications: { en: '<sup class="corr">†</sup> equal contribution<br><sup class="corr">*</sup> corresponding author',
@@ -112,6 +137,14 @@
       .replace(/#/g,  '<sup class="corr" title="Equal contribution">†</sup>');
   }
   function attr(s) { return String(s).replace(/"/g, '&quot;'); }
+
+  // 把访客输入的文字变成安全的 HTML。留言板一定要用这个 ——
+  // 否则任何人都能在留言里塞一段脚本，在别人的浏览器里跑起来。
+  function esc(s) {
+    return String(s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  }
   function emptyBlock(msg) { return '<div class="empty">' + (msg || t(UI.labels.empty)) + '</div>'; }
   function extLink(url) { return /^https?:\/\//i.test(url) ? ' target="_blank" rel="noopener"' : ''; }
 
@@ -542,61 +575,192 @@
   }
 
   /* ---------- 页面：留言板 ---------- */
+  function guestReady() {
+    var sb = S.guestbook && S.guestbook.supabase;
+    return !!(sb && sb.url && sb.anonKey);
+  }
+
   function pageGuestbook() {
     var g = S.guestbook;
+    var G = UI.guest;
     var h = '<div class="page"><header class="page__head">';
     h += '<h1 class="page__title">' + t(UI.nav.hello) + '</h1>';
     if (g && has(g.lede)) h += '<p class="page__lede">' + t(g.lede) + '</p>';
     h += '</header>';
 
-    if (!g || !g.giscus || !g.giscus.repo || !g.giscus.repoId) {
+    if (!guestReady()) {
       return h + emptyBlock(t(UI.labels.guestSetup)) + '</div>';
     }
 
-    if (has(g.note)) {
-      h += '<div class="card guest-intro"><p class="card__body">' + t(g.note) + '</p></div>';
-    }
-    h += '<div id="giscus-mount"></div>';
+    if (has(g.note)) h += '<p class="gb-note">' + t(g.note) + '</p>';
+
+    h += '<form class="gb-form" id="gbForm" novalidate>';
+    h += '<input class="gb-input" id="gbName" type="text" maxlength="40" autocomplete="off"' +
+         ' placeholder="' + attr(t(G.name)) + '" aria-label="' + attr(t(G.name)) + '">';
+    h += '<textarea class="gb-input gb-input--area" id="gbBody" rows="4" maxlength="800"' +
+         ' placeholder="' + attr(t(G.hint)) + '" aria-label="' + attr(t(G.body)) + '"></textarea>';
+
+    // 蜜罐：藏起来的输入框。真人看不见也 tab 不到，机器人却会老老实实填。
+    // 一旦填了就当作机器人，假装发送成功但什么都不发出去。
+    h += '<div class="gb-hp" aria-hidden="true"><label>Website' +
+         '<input id="gbHp" type="text" tabindex="-1" autocomplete="off"></label></div>';
+
+    h += '<div class="gb-form__foot">';
+    h += '<button class="btn gb-send" id="gbSend" type="submit">' + t(G.send) + '</button>';
+    h += '<span class="gb-msg" id="gbMsg" role="status"></span>';
+    h += '</div></form>';
+
+    h += '<div class="gb-list" id="gbList"><p class="gb-loading">' + t(G.loading) + '</p></div>';
     return h + '</div>';
   }
 
-  /* ---------- giscus 留言板 ---------- */
-  function giscusTheme() {
-    return document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+  /* ---------- 留言板：跟 Supabase 打交道 ----------
+     留言存在 Supabase 的 messages 表里。anonKey 是公钥，写在前端是设计如此；
+     真正管权限的是数据库那边的规则：任何人都能读、能写一条，但谁都不能改、
+     不能删。要删只能你自己上 supabase.com 后台。
+     防机器人一共四道：蜜罐、最短停留时间、本机冷却、数据库端的限流和禁链接。 */
+  var GB_TABLE    = 'messages';
+  var GB_MINTIME  = 3000;    // 打开页面后至少停留 3 秒才能发（机器人是秒发的）
+  var GB_COOLDOWN = 60000;   // 同一个浏览器，两条留言之间至少隔一分钟
+  var gbOpenedAt  = 0;
+  var gbSending   = false;   // 上一条还在路上时，挡住第二条
+  var gbDraft     = { name: '', body: '' };   // 切换语言会整页重画，别把人家写了一半的话弄丢
+
+  function gbKey() { return S.guestbook.supabase.anonKey; }
+  function gbEndpoint(q) {
+    return String(S.guestbook.supabase.url).replace(/\/+$/, '') +
+           '/rest/v1/' + GB_TABLE + (q || '');
   }
 
-  function mountGiscus() {
-    var g = S.guestbook && S.guestbook.giscus;
-    var mount = document.getElementById('giscus-mount');
-    if (!mount || !g || !g.repo || !g.repoId) return;
-
-    mount.innerHTML = '';
-    var s = document.createElement('script');
-    s.src = 'https://giscus.app/client.js';
-    s.setAttribute('data-repo', g.repo);
-    s.setAttribute('data-repo-id', g.repoId);
-    s.setAttribute('data-category', g.category || '');
-    s.setAttribute('data-category-id', g.categoryId || '');
-    s.setAttribute('data-mapping', 'specific');
-    s.setAttribute('data-term', 'guestbook');
-    s.setAttribute('data-reactions-enabled', '1');
-    s.setAttribute('data-emit-metadata', '0');
-    s.setAttribute('data-input-position', 'top');
-    s.setAttribute('data-theme', giscusTheme());
-    s.setAttribute('data-lang', lang === 'zh' ? 'zh-CN' : 'en');
-    s.crossOrigin = 'anonymous';
-    s.async = true;
-    mount.appendChild(s);
+  function gbDate(iso) {
+    var d = new Date(iso);
+    if (isNaN(d.getTime())) return '';
+    try {
+      return d.toLocaleDateString(lang === 'zh' ? 'zh-CN' : 'en-GB',
+                                  { year: 'numeric', month: 'short', day: 'numeric' });
+    } catch (e) {
+      return String(iso).slice(0, 10);
+    }
   }
 
-  // 主题切换时同步告诉 giscus 换色
-  function syncGiscusTheme() {
-    var frame = document.querySelector('iframe.giscus-frame');
-    if (!frame || !frame.contentWindow) return;
-    frame.contentWindow.postMessage(
-      { giscus: { setConfig: { theme: giscusTheme() } } },
-      'https://giscus.app'
-    );
+  function gbRender(rows) {
+    var G = UI.guest;
+    var list = document.getElementById('gbList');
+    if (!list) return;
+    if (!rows || !rows.length) {
+      list.innerHTML = '<div class="empty">' + t(G.none) + '</div>';
+      return;
+    }
+    var h = '<p class="gb-count">' + rows.length + ' ' + t(G.count) + '</p>';
+    rows.forEach(function (r) {
+      var who = String(r.name || '').trim() || t(G.anon);
+      h += '<article class="gb-item"><div class="gb-item__head">';
+      h += '<span class="gb-avatar" aria-hidden="true">' + esc(initials(who)) + '</span>';
+      h += '<b class="gb-who">' + esc(who) + '</b>';
+      h += '<time class="gb-when">' + esc(gbDate(r.created_at)) + '</time>';
+      h += '</div><p class="gb-body">' + esc(r.body).replace(/\n/g, '<br>') + '</p></article>';
+    });
+    list.innerHTML = h;
+  }
+
+  function gbLoad() {
+    if (!document.getElementById('gbList')) return;
+    fetch(gbEndpoint('?select=name,body,created_at&is_hidden=eq.false' +
+                     '&order=created_at.desc&limit=200'),
+          { headers: { apikey: gbKey(), Authorization: 'Bearer ' + gbKey() }, cache: 'no-store' })
+      .then(function (r) {
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        return r.json();
+      })
+      .then(gbRender)
+      .catch(function (err) {
+        console.error('[guestbook] 读取失败：', err);
+        var l = document.getElementById('gbList');
+        if (l) l.innerHTML = '<div class="empty">' + t(UI.guest.errNet) + '</div>';
+      });
+  }
+
+  function gbSay(text, kind) {
+    var el = document.getElementById('gbMsg');
+    if (!el) return;
+    el.textContent = text || '';
+    el.className = 'gb-msg' + (kind ? ' gb-msg--' + kind : '');
+  }
+
+  function gbSubmit(e) {
+    e.preventDefault();
+    var G = UI.guest;
+    var nameEl = document.getElementById('gbName');
+    var bodyEl = document.getElementById('gbBody');
+    var hpEl   = document.getElementById('gbHp');
+    var btn    = document.getElementById('gbSend');
+    if (!bodyEl || !btn || gbSending) return;
+
+    // 蜜罐被填了 —— 是机器人。假装成功，一个字都不发出去。
+    if (hpEl && hpEl.value) { bodyEl.value = ''; gbSay(t(G.thanks), 'ok'); return; }
+
+    var body = bodyEl.value.trim();
+    var who  = (nameEl ? nameEl.value : '').trim();
+
+    if (!body)             { gbSay(t(G.errEmpty), 'bad'); return; }
+    if (body.length > 800) { gbSay(t(G.errLong),  'bad'); return; }
+    if (/(https?:\/\/|www\.)/i.test(body + ' ' + who)) { gbSay(t(G.errLink), 'bad'); return; }
+    if (Date.now() - gbOpenedAt < GB_MINTIME) { gbSay(t(G.errSlow), 'bad'); return; }
+
+    var last = 0;
+    try { last = parseInt(localStorage.getItem('gbLast') || '0', 10) || 0; } catch (e1) {}
+    if (Date.now() - last < GB_COOLDOWN) { gbSay(t(G.errWait), 'bad'); return; }
+
+    gbSending = true;
+    btn.disabled = true;
+    gbSay(t(G.sending), '');
+
+    fetch(gbEndpoint(), {
+      method: 'POST',
+      headers: {
+        apikey: gbKey(),
+        Authorization: 'Bearer ' + gbKey(),
+        'Content-Type': 'application/json',
+        Prefer: 'return=minimal'
+      },
+      body: JSON.stringify({ name: who.slice(0, 40), body: body })
+    })
+      .then(function (r) {
+        // 数据库那边拦下来了：撞上限流，或者违反了长度／禁链接的约束
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        try { localStorage.setItem('gbLast', String(Date.now())); } catch (e2) {}
+        bodyEl.value = '';
+        gbDraft = { name: who, body: '' };   // 名字留着，免得回头再留一条还要重打
+        gbSay(t(G.thanks), 'ok');
+        gbLoad();
+      })
+      .catch(function (err) {
+        console.error('[guestbook] 发送失败：', err);
+        gbSay(t(G.errBusy), 'bad');
+      })
+      .then(function () { gbSending = false; btn.disabled = false; });
+  }
+
+  function mountGuestbook() {
+    if (!guestReady()) return;
+    // 只在整页第一次打开时记时间，切语言、来回翻页都不该重新计时
+    if (!gbOpenedAt) gbOpenedAt = Date.now();
+
+    var form   = document.getElementById('gbForm');
+    var nameEl = document.getElementById('gbName');
+    var bodyEl = document.getElementById('gbBody');
+    if (!form) return;
+
+    // 把重画之前写了一半的内容放回去
+    if (nameEl) nameEl.value = gbDraft.name;
+    if (bodyEl) bodyEl.value = gbDraft.body;
+
+    form.addEventListener('submit', gbSubmit);
+    form.addEventListener('input', function () {
+      gbDraft.name = nameEl ? nameEl.value : '';
+      gbDraft.body = bodyEl ? bodyEl.value : '';
+    });
+    gbLoad();
   }
 
   /* ---------- 页面：简历 ---------- */
@@ -714,7 +878,7 @@
       console.error(err);
     }
 
-    if (page === 'hello') mountGiscus();
+    if (page === 'hello') mountGuestbook();
 
     var name = t(S.profile && S.profile.name);
     document.title = (page === 'about' ? name : t(UI.nav[page]) + ' — ' + name);
@@ -728,7 +892,6 @@
   function applyTheme(mode) {
     document.documentElement.setAttribute('data-theme', mode);
     try { localStorage.setItem('theme', mode); } catch (e) {}
-    syncGiscusTheme();
   }
 
   function initTheme() {

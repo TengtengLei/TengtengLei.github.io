@@ -681,12 +681,20 @@ window.SITE = {
     ]
   },
 
-  /* ── 8. 留言板 ─────────────────────────────────────────────────────
-     配置步骤（仓库已经上线，现在可以配了）：
-       1. 仓库 Settings → General → 勾选 Features 里的 Discussions
-       2. 打开 https://giscus.app ，仓库填 TengtengLei/TengtengLei.github.io
-       3. 按提示装一下 giscus app，页面下方会生成 repoId 和 categoryId
-       4. 把四个值填到下面，留言板就活了
+  /* ── 8. 留言板（匿名，任何人都能留，留完立刻显示）───────────────────
+     留言存在 Supabase（一个免费的在线数据库）里。GitHub Pages 只能发文件、
+     不能存数据，所以必须借一个外部数据库，这是唯一要额外注册的东西。
+
+     配置步骤见 README.md 的「开通留言板」那一节，大约十分钟。
+     配好之后把两个值填到下面就能用了：
+
+       url     —— 形如 https://abcdefghijk.supabase.co
+       anonKey —— 很长的一串，以 eyJ 开头
+
+     ⚠️ anonKey 出现在公开仓库里是正常的，它本来就是给浏览器用的公钥。
+        真正拦住坏人的是数据库那边的权限规则（README 里的 SQL 已经配好）：
+        任何人都能读、能写一条留言，但谁都不能改、不能删。
+        能删的只有你，在 supabase.com 后台。
      ─────────────────────────────────────────────────────────────── */
   guestbook: {
     lede: {
@@ -694,14 +702,12 @@ window.SITE = {
       zh: '打个招呼、问个问题，或者告诉我哪里说错了。我都会看。'
     },
     note: {
-      en: 'Comments are powered by GitHub Discussions — you will need a GitHub account to post.',
-      zh: '留言由 GitHub Discussions 驱动，需要有 GitHub 账号才能发言。'
+      en: 'No account needed — leave a name or stay anonymous, either is fine. Messages appear straight away, and I can remove anything unkind.',
+      zh: '不用注册，留个名字或者完全匿名都可以。留言会立刻显示出来，不友善的内容我会删掉。'
     },
-    giscus: {
-      repo:       '',   // 'TengtengLei/TengtengLei.github.io'
-      repoId:     '',   // giscus.app 会生成
-      category:   '',   // 例：'Announcements'
-      categoryId: ''    // giscus.app 会生成
+    supabase: {
+      url:     '',   // 'https://xxxxxxxxxxxx.supabase.co'
+      anonKey: ''    // 'eyJhbGciOi……' 很长的一串
     }
   },
 

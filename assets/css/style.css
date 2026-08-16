@@ -715,10 +715,85 @@ html[data-theme="dark"] .pub__authors .me { color: #1A1523; }
 .pick-list span { display: block; color: var(--muted); font-size: .92rem; font-weight: 600; }
 
 /* ---------- 14. 留言板 ---------- */
-.guest-intro { margin-bottom: 2rem; }
-#giscus-mount { min-height: 200px; }
-.giscus, .giscus-frame { width: 100%; }
-.giscus-frame { border: none; }
+.gb-note {
+  margin: 0 0 1.4rem; color: var(--muted); font-weight: 700; font-size: .95rem; max-width: 62ch;
+}
+
+/* 写留言的表单 */
+.gb-form {
+  position: relative;
+  border: var(--bw) solid var(--line); border-radius: var(--r);
+  background: color-mix(in srgb, var(--accent) 16%, var(--surface));
+  box-shadow: 6px 6px 0 var(--shadow);
+  padding: 1.5rem 1.6rem;
+  display: flex; flex-direction: column; gap: .9rem;
+  margin-bottom: 2.6rem;
+}
+
+.gb-input {
+  width: 100%; box-sizing: border-box;
+  border: var(--bw) solid var(--line); border-radius: var(--r-sm);
+  background: var(--surface); color: var(--ink);
+  font-family: var(--font-body); font-size: 1rem; font-weight: 600;
+  padding: .65rem .9rem;
+  transition: box-shadow .14s, border-color .14s;
+}
+.gb-input::placeholder { color: var(--muted); font-weight: 600; opacity: .85; }
+.gb-input:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 62%, transparent);
+}
+.gb-input--area { resize: vertical; min-height: 108px; line-height: 1.55; }
+
+/* 蜜罐：挪到屏幕外，真人看不见也 tab 不到，机器人会填 */
+.gb-hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+.gb-form__foot { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+.gb-send {
+  height: 42px; padding: 0 1.4rem; font-size: .95rem;
+  background: var(--accent); color: #1A1523;
+}
+.gb-send:disabled {
+  opacity: .55; cursor: not-allowed;
+  transform: none; box-shadow: 3px 3px 0 var(--shadow);
+}
+.gb-msg { font-weight: 800; font-size: .9rem; }
+.gb-msg--ok  { color: #1F7A4D; }
+.gb-msg--bad { color: #B3243C; }
+html[data-theme="dark"] .gb-msg--ok  { color: #6FDCA6; }
+html[data-theme="dark"] .gb-msg--bad { color: #FF97A9; }
+
+/* 留言列表 */
+.gb-count {
+  margin: 0 0 1rem; color: var(--muted);
+  font-weight: 800; font-size: .85rem; text-transform: uppercase; letter-spacing: .04em;
+}
+.gb-loading { color: var(--muted); font-weight: 700; }
+.gb-list { display: flex; flex-direction: column; gap: 1.1rem; }
+.gb-list .gb-count, .gb-list .gb-loading { margin-bottom: 0; }
+
+.gb-item {
+  border: var(--bw) solid var(--line); border-radius: var(--r);
+  background: var(--surface); box-shadow: 5px 5px 0 var(--shadow);
+  padding: 1.1rem 1.3rem 1.2rem;
+}
+.gb-item__head { display: flex; align-items: center; gap: .6rem; margin-bottom: .55rem; }
+.gb-avatar {
+  flex: none; width: 34px; height: 34px; border-radius: 50%;
+  display: grid; place-items: center;
+  border: 2.5px solid var(--line); background: var(--accent); color: #1A1523;
+  font-family: var(--font-display); font-weight: 600; font-size: .92rem; line-height: 1;
+}
+.gb-list .gb-item:nth-of-type(6n+1) .gb-avatar { background: var(--c-pink);   }
+.gb-list .gb-item:nth-of-type(6n+2) .gb-avatar { background: var(--c-blue);   }
+.gb-list .gb-item:nth-of-type(6n+3) .gb-avatar { background: var(--c-green);  }
+.gb-list .gb-item:nth-of-type(6n+4) .gb-avatar { background: var(--c-purple); }
+.gb-list .gb-item:nth-of-type(6n+5) .gb-avatar { background: var(--c-orange); }
+.gb-list .gb-item:nth-of-type(6n+6) .gb-avatar { background: var(--c-cyan);   }
+
+.gb-who  { font-family: var(--font-display); font-weight: 600; font-size: 1.04rem; }
+.gb-when { margin-left: auto; color: var(--muted); font-weight: 700; font-size: .82rem; }
+.gb-body { margin: 0; font-weight: 600; line-height: 1.65; overflow-wrap: anywhere; }
 
 /* ---------- 15. 简历 ---------- */
 .timeline { list-style: none; margin: 0; padding: 0 0 0 2.1rem; position: relative; }
