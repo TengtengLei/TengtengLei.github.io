@@ -5,6 +5,61 @@
 
 ---
 
+## ★ 正式发布前的清单
+
+网站现在**已经是公开的** —— 仓库是 public，网址 `tengtenglei.github.io`
+光看用户名就能猜到。但 Google 暂时**不会**把它列进搜索结果，因为下面第 1 条
+那个「别收录」的牌子还挂着。
+
+内容都填好之后，按顺序做完这几件，主页才会正式出现在搜索结果里。
+**做完一条就把那一条删掉。**
+
+### 1. 摘掉「别收录」的牌子（必做，两处）
+
+这两处不删，Google 永远不会收录你的主页。
+
+- [ ] `index.html` 里删掉这一行：
+      `<meta name="robots" content="noindex, nofollow">`
+      （它上面那两行注释也一起删）
+- [ ] `robots.txt` 里删掉 `Disallow: /` 这一行
+      （下面那几行 `Disallow: /README.md` 要**留着**，
+      那是不让搜索引擎收录说明文档，是对的）
+
+删完推上去，然后去 <https://search.google.com/search-console>
+把 `https://tengtenglei.github.io` 提交一下，收录会快很多。
+不提交的话，Google 自己发现你可能要等几周。
+
+### 2. 把假内容换成真的（或者暂时藏起来）
+
+下面这几处目前还是占位符。**招聘委员会看到 `Member Two` 会觉得网站没做完**，
+所以要么填真的，要么先从导航里藏起来。
+
+- [ ] **Group 成员** —— `content.js` 第 6 节，现在是
+      `Member Two` `Member Three` `someone@example.ac.uk`
+- [ ] **Teaching 课程的视频链接** —— 现在是假地址
+      `list=XXXX`、`BVxxxxxxxxx`，没有真视频就把 `video:` 那行留空 `''`
+- [ ] **Outreach 播客名** —— 现在是 `Name of Your Podcast`
+- [ ] **Teaching FAQ 招生名额那条** —— 里面还留着一句给你自己看的
+      `⚠️ 请填写目前实际有的名额……`，这句会**显示在网页上**，记得删
+
+**想先藏起来怎么做**：打开 `assets/js/app.js`，找到这一行（搜 `var PAGES`）：
+
+```
+var PAGES = ['about', 'cv', 'research', 'publications', 'group', 'teaching', 'media', 'life', 'hello'];
+```
+
+把不想露出来的页面名从这个方括号里删掉即可，比如去掉 `'group'` 和 `'media'`。
+页面本身还在，内容一个字都不会丢，只是导航栏上不显示、别人也点不进去。
+以后填好了，把名字加回这一行就恢复了。
+
+### 3. 顺手检查
+
+- [ ] 手机上打开看一遍（导航会变成一个汉堡菜单）
+- [ ] 点一遍 About 页面那三个按钮，确认都能跳对地方
+- [ ] `files/CV.pdf` 是不是最新版的简历
+
+---
+
 ## 1. 文件结构（只有一个文件需要你动）
 
 ```
