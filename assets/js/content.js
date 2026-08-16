@@ -223,6 +223,7 @@ window.SITE = {
       authors: '*Tengteng Lei*, Runxiao Shi, Zong Liu, Yushen Hu, Man Wong',
       venue: { en: '*IEEE Open Journal on Immersive Displays*, vol. 1, pp. 20–27.',
                zh: '*IEEE Open Journal on Immersive Displays*，第 1 卷，20–27 页。' },
+      doi: '10.1109/OJID.2023.3343309',
       links: []
     },
     {
@@ -240,8 +241,10 @@ window.SITE = {
       title: { en: 'An Active-Matrix Piezoelectric Tactile Sensor Array with In-Pixel Amplifier and Non-Uniformity Compensation',
                zh: '带像素内放大与非均匀性补偿的有源矩阵压电触觉传感器阵列' },
       authors: '*Tengteng Lei*, Yushen Hu, Xinying Xie, Man Wong',
-      venue: { en: 'Digest Tech. Papers *Transducers 2023*, Kyoto, pp. 298–301 — oral.',
-               zh: '*Transducers 2023* 论文集，日本京都，298–301 页。口头报告。' },
+      venue: { en: 'Digest Tech. Papers *Transducers 2023*, Kyoto, pp. 298–301.',
+               zh: '*Transducers 2023* 论文集，日本京都，298–301 页。' },
+      // Crossref 里查不到这篇的 DOI，退而用 IEEE Xplore 页面链接
+      url: 'https://ieeexplore.ieee.org/document/10517256',
       links: []
     },
     {
@@ -249,8 +252,8 @@ window.SITE = {
       title: { en: 'A Tactile Sensor Array with a Monolithically Integrated Neural Network for Edge Computation',
                zh: '单片集成神经网络的触觉传感器阵列及其边缘计算应用' },
       authors: '*Tengteng Lei*, Yushen Hu, Man Wong',
-      venue: { en: 'Digest Tech. Papers *MEMS 2023*, Munich, pp. 13–16 — oral.',
-               zh: '*MEMS 2023* 论文集，德国慕尼黑，13–16 页。口头报告。' },
+      venue: { en: 'Digest Tech. Papers *MEMS 2023*, Munich, pp. 13–16.',
+               zh: '*MEMS 2023* 论文集，德国慕尼黑，13–16 页。' },
       doi: '10.1109/mems49605.2023.10052560',
       links: []
     },
@@ -269,8 +272,8 @@ window.SITE = {
       title: { en: 'Active-Matrix Tactile Sensor Array Based on the Monolithic Integration of PVDF and Dual-Gate Transistors',
                zh: '基于 PVDF 与双栅晶体管单片集成的有源矩阵触觉传感器阵列' },
       authors: '*Tengteng Lei*, Yushen Hu, Man Wong',
-      venue: { en: 'Digest Tech. Papers *MEMS 2022*, Tokyo, pp. 71–74 — oral.',
-               zh: '*MEMS 2022* 论文集，日本东京，71–74 页。口头报告。' },
+      venue: { en: 'Digest Tech. Papers *MEMS 2022*, Tokyo, pp. 71–74.',
+               zh: '*MEMS 2022* 论文集，日本东京，71–74 页。' },
       doi: '10.1109/mems51670.2022.9699743',
       links: []
     },
@@ -299,8 +302,9 @@ window.SITE = {
       title: { en: 'An a-InGaZnO TFT Gate Driver Circuit with Positive Feedback Effect',
                zh: '具有正反馈效应的 a-InGaZnO TFT 栅极驱动电路' },
       authors: '*Tengteng Lei*, Congwei Liao, Jie Huang, Ying Wang, Shengdong Zhang',
-      venue: { en: '*International Conference on CAD-TFT* — oral.',
-               zh: '*International Conference on CAD-TFT*，口头报告。' },
+      venue: { en: '*International Conference on CAD-TFT*.',
+               zh: '*International Conference on CAD-TFT*。' },
+      doi: '10.1109/CAD-TFT.2018.8608053',
       links: []
     },
 

@@ -239,9 +239,13 @@
       h += '<p class="pub__title">' + t(p.title) + badge + '</p>';
       if (p.authors)    h += '<p class="pub__authors">' + me(p.authors) + '</p>';
       if (has(p.venue)) h += '<p class="pub__venue">' + em(t(p.venue)) + '</p>';
+      // 第四行：有 DOI 就显示 DOI，没有就退回 url（比如 IEEE Xplore 页面）
       if (p.doi) {
         h += '<p class="pub__doi"><a href="https://doi.org/' + attr(p.doi) +
              '" target="_blank" rel="noopener">https://doi.org/' + p.doi + '</a></p>';
+      } else if (p.url) {
+        h += '<p class="pub__doi"><a href="' + attr(p.url) +
+             '" target="_blank" rel="noopener">' + p.url + '</a></p>';
       }
       if (nonEmpty(p.links)) {
         h += '<div class="pub__links">';
