@@ -54,7 +54,7 @@ window.SITE = {
       { icon: 'file',    label: { en: 'CV (PDF)',       zh: '简历 PDF' }, url: 'files/CV.pdf' },
       { icon: 'scholar', label: { en: 'Google Scholar', zh: '学术主页' }, url: 'https://scholar.google.com/citations?user=YOUR_ID' },
       { icon: 'orcid',   label: { en: 'ORCID',          zh: 'ORCID'    }, url: 'https://orcid.org/0000-0002-3780-0058' },
-      { icon: 'github',  label: { en: 'GitHub',         zh: 'GitHub'   }, url: 'https://github.com/YOUR_USERNAME' }
+      { icon: 'github',  label: { en: 'GitHub',         zh: 'GitHub'   }, url: 'https://github.com/TengtengLei' }
     ]
   },
 

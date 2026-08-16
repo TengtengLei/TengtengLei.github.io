@@ -99,6 +99,20 @@
   function emptyBlock(msg) { return '<div class="empty">' + (msg || t(UI.labels.empty)) + '</div>'; }
   function extLink(url) { return /^https?:\/\//i.test(url) ? ' target="_blank" rel="noopener"' : ''; }
 
+  // 时间胶囊列表：越新的条目颜色越深，往下逐条变浅。
+  // 深浅是按「第几条 / 共几条」算的，所以加减条目都会自动重新分配。
+  // 混白色而不是混背景色，这样深色模式下胶囊依然是浅底深字，不会看不清。
+  function newsList(items) {
+    var n = items.length;
+    var h = '<ul class="news">';
+    items.forEach(function (it, i) {
+      var pct = n > 1 ? Math.round(100 - (i / (n - 1)) * 55) : 100;
+      h += '<li><time style="background:color-mix(in srgb, var(--accent) ' + pct + '%, #ffffff)">' +
+           t(it.date) + '</time><span>' + t(it.text) + '</span></li>';
+    });
+    return h + '</ul>';
+  }
+
   /* ---------- 页面：关于我 ---------- */
   function pageAbout() {
     var p = S.profile || {};
@@ -129,11 +143,8 @@
     h += '</div></section>';
 
     if (nonEmpty(S.news)) {
-      h += '<section class="section"><h2 class="section__title">' + t(UI.headings.news) + '</h2><ul class="news">';
-      S.news.forEach(function (n) {
-        h += '<li><time>' + t(n.date) + '</time><span>' + t(n.text) + '</span></li>';
-      });
-      h += '</ul></section>';
+      h += '<section class="section"><h2 class="section__title">' + t(UI.headings.news) + '</h2>' +
+           newsList(S.news) + '</section>';
     }
 
     return h + '</div>';
@@ -350,11 +361,8 @@
 
     if (nonEmpty(m.press)) {
       anything = true;
-      h += '<section class="section"><h2 class="section__title">' + t(UI.headings.press) + '</h2><ul class="news">';
-      m.press.forEach(function (pr) {
-        h += '<li><time>' + t(pr.date) + '</time><span>' + t(pr.text) + '</span></li>';
-      });
-      h += '</ul></section>';
+      h += '<section class="section"><h2 class="section__title">' + t(UI.headings.press) + '</h2>' +
+           newsList(m.press) + '</section>';
     }
 
     if (!anything) h += emptyBlock();
