@@ -237,11 +237,11 @@ html[data-theme="dark"] .icon-moon { display: block; }
 }
 
 /* ---------- 7. 首页 hero ---------- */
-.hero { display: grid; grid-template-columns: 240px 1fr; gap: 2.8rem; align-items: start; }
-@media (max-width: 800px) { .hero { grid-template-columns: 1fr; gap: 1.8rem; } }
+.hero { display: grid; grid-template-columns: 360px 1fr; gap: 2.8rem; align-items: start; }
+@media (max-width: 860px) { .hero { grid-template-columns: 1fr; gap: 1.8rem; } }
 
 .hero__photo {
-  width: 240px; height: 240px; object-fit: cover;
+  width: 360px; height: 360px; object-fit: cover;
   border: var(--bw) solid var(--line); border-radius: 26px;
   box-shadow: 8px 8px 0 var(--accent);
   background: var(--surface);
@@ -249,7 +249,9 @@ html[data-theme="dark"] .icon-moon { display: block; }
   transition: transform .3s cubic-bezier(.34,1.5,.5,1);
 }
 .hero__photo:hover { transform: rotate(1.5deg) scale(1.02); }
-@media (max-width: 800px) { .hero__photo { width: 170px; height: 170px; } }
+/* 断点要和上面 .hero 折叠成单栏的断点一致，否则中间那段宽度会出现
+   「单栏布局 + 超大照片」的怪状态 */
+@media (max-width: 860px) { .hero__photo { width: 200px; height: 200px; } }
 
 .hero__name {
   font-family: var(--font-display); font-weight: 600;
