@@ -244,6 +244,9 @@ html[data-theme="dark"] .icon-moon { display: block; }
    换成别的比例的照片时，object-fit: cover 会自动居中裁切；
    想让画面偏上或偏下，加一行 object-position: center 30%; 之类即可。 */
 .hero__photo {
+  /* 下移 16px：对齐名字「字形」的顶端，而不是文字盒的顶端 ——
+     标题的行距会在字母上方留出一段空白，不补这一下照片看起来会偏高。 */
+  margin-top: 16px;
   width: 360px; height: 480px; object-fit: cover;
   border: var(--bw) solid var(--line); border-radius: 26px;
   box-shadow: 8px 8px 0 var(--accent);
@@ -254,7 +257,8 @@ html[data-theme="dark"] .icon-moon { display: block; }
 .hero__photo:hover { transform: rotate(1.5deg) scale(1.02); }
 /* 断点要和上面 .hero 折叠成单栏的断点一致，否则中间那段宽度会出现
    「单栏布局 + 超大照片」的怪状态 */
-@media (max-width: 860px) { .hero__photo { width: 210px; height: 280px; } }
+/* 单栏时照片在最上面，没有要对齐的东西，把那 16px 去掉 */
+@media (max-width: 860px) { .hero__photo { width: 210px; height: 280px; margin-top: 0; } }
 
 .hero__name {
   font-family: var(--font-display); font-weight: 600;
