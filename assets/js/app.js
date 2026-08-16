@@ -237,7 +237,18 @@
     if (has(tc.lede)) h += '<p class="page__lede">' + t(tc.lede) + '</p>';
     h += '</header>';
 
+    var anything = false;
+
+    // 教学理念放在最前面：它是「我为什么这么教」，
+    // 给后面的课程列表提供解读框架。
+    if (tc.statement && has(tc.statement.body)) {
+      anything = true;
+      h += '<section class="section"><h2 class="section__title">' + t(tc.statement.title) + '</h2>';
+      h += '<div class="card"><p class="statement">' + t(tc.statement.body) + '</p></div></section>';
+    }
+
     if (nonEmpty(tc.courses)) {
+      anything = true;
       h += '<section class="section"><h2 class="section__title">' + t(UI.headings.courses) + '</h2><div class="stack">';
       tc.courses.forEach(function (c) {
         h += '<article class="course">';
@@ -258,16 +269,10 @@
         h += '</article>';
       });
       h += '</div></section>';
-    } else {
-      h += emptyBlock();
-    }
-
-    if (tc.statement && has(tc.statement.body)) {
-      h += '<section class="section"><h2 class="section__title">' + t(tc.statement.title) + '</h2>';
-      h += '<div class="card"><p class="card__body">' + t(tc.statement.body) + '</p></div></section>';
     }
 
     if (nonEmpty(tc.faq)) {
+      anything = true;
       h += '<section class="section"><h2 class="section__title">' + t(UI.headings.faq) + '</h2><div class="faq">';
       tc.faq.forEach(function (f) {
         h += '<details><summary>' + t(f.q) + '</summary>';
@@ -276,6 +281,7 @@
       h += '</div></section>';
     }
 
+    if (!anything) h += emptyBlock();
     return h + '</div>';
   }
 

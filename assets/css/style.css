@@ -391,22 +391,18 @@ html[data-theme="dark"] .icon-moon { display: block; }
 .chip[data-filter="chapter"]    { --chip: var(--c-cyan);   }
 .chip[data-filter="all"]        { --chip: var(--accent);   }
 
+/* 未选中＝该颜色的淡色底，选中＝饱和色。
+   这样不点开也看得出哪个按钮对应哪种标签，又不用加小圆点。 */
 .chip {
-  display: inline-flex; align-items: center; gap: .5rem;
-  border: var(--bw) solid var(--line); background: var(--surface); color: var(--ink);
+  border: var(--bw) solid var(--line);
+  background: color-mix(in srgb, var(--chip) 22%, var(--surface));
+  color: var(--ink);
   font-family: var(--font-display); font-size: .9rem; font-weight: 500; cursor: pointer;
-  padding: .3rem .95rem; border-radius: 100px; box-shadow: 3px 3px 0 var(--shadow);
+  padding: .3rem 1.05rem; border-radius: 100px; box-shadow: 3px 3px 0 var(--shadow);
   transition: transform .14s, box-shadow .14s, background .14s, color .14s;
 }
-/* 未选中时用一颗小色点标明它对应哪种标签 */
-.chip::before {
-  content: ""; flex: none; width: 11px; height: 11px; border-radius: 50%;
-  border: 2px solid var(--line); background: var(--chip);
-}
-.chip[data-filter="all"]::before { display: none; }
 .chip:hover { transform: translate(-2px,-2px); box-shadow: 5px 5px 0 var(--shadow); }
 .chip.is-active { background: var(--chip); color: #1A1523; }
-.chip.is-active::before { background: var(--surface); }
 
 .year-head {
   font-family: var(--font-display); font-size: 2rem; font-weight: 600;
@@ -455,6 +451,9 @@ html[data-theme="dark"] .pub__authors .me { color: #1A1523; }
 .badge--chapter    { background: var(--c-cyan);   }
 
 /* ---------- 11. 教学 ---------- */
+/* 教学理念：这一页的开场白，比正文稍大一点 */
+.statement { margin: 0; font-size: 1.06rem; font-weight: 600; }
+
 .course { border: var(--bw) solid var(--line); border-radius: var(--r); background: var(--surface); padding: 1.6rem 1.7rem; box-shadow: 6px 6px 0 var(--shadow); }
 .course__top { display: flex; flex-wrap: wrap; align-items: center; gap: .7rem; margin-bottom: .4rem; }
 .course__code {
