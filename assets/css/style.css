@@ -406,15 +406,11 @@ html[data-theme="dark"] .icon-moon { display: block; }
 .chip:hover { transform: translate(-2px,-2px); box-shadow: 5px 5px 0 var(--shadow); }
 .chip.is-active { background: var(--chip); color: #1A1523; }
 
-/* 年份用深色字保证可读，主题色交给后面那道横条去表达 */
+/* 年份：深色字，不加装饰线。靠字号和字重跟下面的论文标题拉开层级即可。 */
 .year-head {
-  font-family: var(--font-display); font-size: 1.6rem; font-weight: 600;
-  margin: 2.6rem 0 1.1rem; display: flex; align-items: center; gap: 1rem;
+  font-family: var(--font-display); font-size: 1.7rem; font-weight: 600;
+  margin: 2.8rem 0 1.1rem;
   color: var(--ink);
-}
-.year-head::after {
-  content: ""; flex: 1; height: 8px; border-radius: 100px;
-  background: var(--accent); border: 2px solid var(--line);
 }
 .year-head:first-of-type { margin-top: 0; }
 
