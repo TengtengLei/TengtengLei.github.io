@@ -77,7 +77,8 @@
   var lang = 'en';
   var pubFilter = 'all';
 
-  var PAGES = ['about', 'research', 'publications', 'teaching', 'media', 'life', 'cv', 'hello'];
+  // 导航顺序。想调整就改这一行的先后，颜色会自动跟着页面走。
+  var PAGES = ['about', 'cv', 'research', 'publications', 'teaching', 'media', 'life', 'hello'];
 
   /* ---------- 小工具 ---------- */
 
