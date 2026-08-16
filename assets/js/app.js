@@ -41,6 +41,7 @@
       patent:    { en: 'Patent',         zh: '专利'     },
       chapter:   { en: 'Chapter',        zh: '专著章节' },
       downloadCv:{ en: 'Download CV (PDF)', zh: '下载简历 PDF' },
+      downloadStatement: { en: 'Teaching Statement (PDF)', zh: '下载教学陈述 PDF' },
       email:     { en: 'Email',          zh: '邮箱'     },
       office:    { en: 'Office',         zh: '办公室'   },
       address:   { en: 'Address',        zh: '地址'     },
@@ -259,7 +260,13 @@
     if (tc.statement && has(tc.statement.body)) {
       anything = true;
       h += '<section class="section"><h2 class="section__title">' + t(tc.statement.title) + '</h2>';
-      h += '<div class="card"><p class="statement">' + t(tc.statement.body) + '</p></div></section>';
+      h += '<div class="card"><p class="statement">' + t(tc.statement.body) + '</p>';
+      if (tc.statement.pdf) {
+        h += '<div class="links" style="margin-top:1.3rem">' +
+             '<a class="link-pill link-pill--primary" href="' + attr(tc.statement.pdf) + '" download>' +
+             icon('file') + t(UI.labels.downloadStatement) + '</a></div>';
+      }
+      h += '</div></section>';
     }
 
     if (nonEmpty(tc.courses)) {

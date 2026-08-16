@@ -384,9 +384,12 @@ window.SITE = {
     statement: {
       title: { en: 'Teaching Philosophy', zh: '教学理念' },
       body: {
-        en: 'I served as a Senior Teaching Assistant Fellow at HKUST, where most of my teaching was in circuits and semiconductor devices. My conviction from that period is simple: students remember what they have built and measured, not what they have been told. A transistor characteristic that a student has fitted from their own noisy measurement teaches more than any derivation on a board. ⚠️ Rewrite this paragraph in your own words before launch — hiring committees read it closely.',
-        zh: '我曾在香港科技大学担任高级助教研究员，教学内容集中在电路与半导体器件。那段经历让我确信一件事：学生记住的是自己动手做过、测过的东西，而不是别人讲过的东西。一条学生从自己带噪声的实测数据里拟合出来的晶体管特性曲线，比黑板上任何推导都更有教益。⚠️ 正式发布前请用你自己的话重写这一段 —— 招聘委员会会仔细读。'
-      }
+        en: 'I served as a Senior Teaching Assistant Fellow at HKUST, where most of my teaching was in circuits and semiconductor devices. My conviction from that period is simple: students remember what they have built and measured, not what they have been told. A transistor characteristic that a student has fitted from their own noisy measurement teaches more than any derivation on a board.',
+        zh: '我曾在香港科技大学担任高级助教研究员，教学内容集中在电路与半导体器件。那段经历让我确信一件事：学生记住的是自己动手做过、测过的东西，而不是别人讲过的东西。一条学生从自己带噪声的实测数据里拟合出来的晶体管特性曲线，比黑板上任何推导都更有教益。'
+      },
+      // 教学陈述 PDF。把文件放进 files/ 文件夹，命名为 Teaching-Statement.pdf。
+      // 不想要这个下载按钮就把这一行删掉，或者设成 ''。
+      pdf: 'files/Teaching-Statement.pdf'
     },
 
     // 给学生的常见问题。默认收起，点一下展开。
