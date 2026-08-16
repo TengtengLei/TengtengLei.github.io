@@ -573,10 +573,12 @@ html[data-theme="dark"] .pub__authors .me { color: #1A1523; }
   transition: transform .16s, box-shadow .16s;
 }
 .now__row:hover { transform: translate(-3px,-3px) rotate(-.4deg); box-shadow: 8px 8px 0 var(--shadow); }
+/* color 写死成深色：emoji 通常是彩色字形，但有些系统会退化成单色轮廓，
+   那时候继承来的浅色字在浅色底上就看不见了。 */
 .now__icon {
   width: 46px; height: 46px; border-radius: 14px; display: grid; place-items: center;
   border: var(--bw) solid var(--line); font-size: 1.4rem; line-height: 1;
-  background: var(--c-yellow);
+  background: var(--c-yellow); color: #1A1523;
 }
 .now__row:nth-child(6n+2) .now__icon { background: var(--c-cyan);   }
 .now__row:nth-child(6n+3) .now__icon { background: var(--c-pink);   }
@@ -657,6 +659,22 @@ html[data-theme="dark"] .pub__authors .me { color: #1A1523; }
 .timeline__what { font-family: var(--font-display); font-size: 1.15rem; font-weight: 600; margin: 0 0 .15rem; }
 .timeline__where { color: var(--muted); margin: 0 0 .4rem; font-weight: 700; }
 .timeline__note { margin: 0; font-size: .96rem; }
+
+/* 简历下半部分：和上面的时间线共用同一条左侧竖线，但不加圆点 ——
+   圆点表示「某个时间点发生的事」，下面这些是并列清单，不该用同一个符号。
+   也不套白底卡片，整页保持一根连贯的竖线。 */
+.cvspine { position: relative; padding-left: 2.1rem; }
+.cvspine::before {
+  content: ""; position: absolute; left: 8px; top: .45rem; bottom: .45rem;
+  width: 3px; background: var(--line); opacity: .25; border-radius: 4px;
+}
+ul.cvspine { list-style: none; margin: 0; }
+.cvspine > li { padding: 0 0 1.05rem; }
+.cvspine > li:last-child { padding-bottom: 0; }
+/* content.js 里的 <em> 在这里当强调用，不要斜体 */
+.cvspine em { font-style: normal; font-weight: 800; color: var(--ink); }
+.cvspine .deflist { margin-bottom: 1.1rem; }
+.cvspine .contact-note { margin: 0; color: var(--muted); font-weight: 600; }
 
 .deflist { display: grid; grid-template-columns: 130px 1fr; gap: .7rem 1.3rem; margin: 0; }
 .deflist dt { font-family: var(--font-display); font-weight: 500; color: var(--muted); }

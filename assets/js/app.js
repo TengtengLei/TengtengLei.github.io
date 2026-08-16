@@ -556,8 +556,8 @@
     if (nonEmpty(c.extras)) {
       c.extras.forEach(function (block) {
         if (!nonEmpty(block.items)) return;
-        h += '<section class="section"><h2 class="section__title">' + t(block.title) + '</h2><ul class="news">';
-        block.items.forEach(function (it) { h += '<li style="grid-template-columns:1fr">' + t(it) + '</li>'; });
+        h += '<section class="section"><h2 class="section__title">' + t(block.title) + '</h2><ul class="cvspine">';
+        block.items.forEach(function (it) { h += '<li>' + t(it) + '</li>'; });
         h += '</ul></section>';
       });
     }
@@ -565,12 +565,18 @@
     var ct = c.contact;
     if (ct) {
       h += '<section class="section"><h2 class="section__title">' + t(UI.headings.contact) + '</h2>';
-      h += '<div class="card"><dl class="deflist">';
-      if (ct.email)        h += '<dt>' + t(UI.labels.email) + '</dt><dd><a href="mailto:' + attr(ct.email) + '">' + ct.email + '</a></dd>';
+      h += '<div class="cvspine"><dl class="deflist">';
+      // email 可以是一个字符串，也可以是一个数组（多个邮箱，用分号隔开显示）
+      var mails = Array.isArray(ct.email) ? ct.email : (ct.email ? [ct.email] : []);
+      if (mails.length) {
+        h += '<dt>' + t(UI.labels.email) + '</dt><dd>' + mails.map(function (e) {
+          return '<a href="mailto:' + attr(e) + '">' + e + '</a>';
+        }).join('; ') + '</dd>';
+      }
       if (has(ct.office))  h += '<dt>' + t(UI.labels.office) + '</dt><dd>' + t(ct.office) + '</dd>';
       if (has(ct.address)) h += '<dt>' + t(UI.labels.address) + '</dt><dd>' + t(ct.address) + '</dd>';
       h += '</dl>';
-      if (has(ct.note)) h += '<p class="card__body" style="margin-top:1.1rem">' + t(ct.note) + '</p>';
+      if (has(ct.note)) h += '<p class="contact-note">' + t(ct.note) + '</p>';
       h += '</div></section>';
     }
 

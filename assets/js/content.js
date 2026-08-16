@@ -48,9 +48,9 @@ window.SITE = {
 
     // 首页头像下方的快捷链接。不需要的整行删掉即可。
     // icon 可选：'mail' 'file' 'scholar' 'orcid' 'github' 'link' 'youtube' 'mic'
+    // 邮箱和简历下载放在 CV 页，这里不重复。
+    // 想加回来就在数组里补一行，格式见其他几行。
     links: [
-      { icon: 'mail',    label: { en: 'Email',          zh: '邮箱'     }, url: 'mailto:t.lei@nulondon.ac.uk', primary: true },
-      { icon: 'file',    label: { en: 'CV (PDF)',       zh: '简历 PDF' }, url: 'files/CV.pdf' },
       { icon: 'orcid',   label: { en: 'ORCID',          zh: 'ORCID'    }, url: 'https://orcid.org/0000-0002-3780-0058' },
       // ↓ Scholar 主页地址栏里 user= 后面那一串，填进来就能用
       { icon: 'scholar', label: { en: 'Google Scholar', zh: '学术主页' }, url: 'https://scholar.google.com/citations?user=YOUR_ID' },
@@ -63,14 +63,16 @@ window.SITE = {
      text 里可以写 HTML 链接：<a href="...">文字</a>                     */
   news: [
     {
-      date: { en: '2026', zh: '2026' },
+      // 月份来自 Crossref 的 published-print 字段（2026-6），准确
+      date: { en: 'Jun 2026', zh: '2026年6月' },
       text: {
         en: 'Paper on monolithically integrated transimpedance accumulators for analog in-memory computing published in <em>IEEE JETCAS</em>.',
         zh: '关于模拟存内计算单片集成跨阻累加器的论文发表于 <em>IEEE JETCAS</em>。'
       }
     },
     {
-      date: { en: '2026', zh: '2026' },
+      // ⚠️ Crossref 只登记了年份，这个月份是按 DOI 注册日期（2026-01-19）推的，请核对
+      date: { en: 'Jan 2026', zh: '2026年1月' },
       text: {
         en: 'Active-matrix digital microfluidics paper published in <em>Lab on a Chip</em> (corresponding author).',
         zh: '有源矩阵数字微流控论文发表于 <em>Lab on a Chip</em>（通讯作者）。'
@@ -714,15 +716,20 @@ window.SITE = {
     ],
 
     contact: {
-      email: 't.lei@nulondon.ac.uk',
+      // 可以写一个字符串，也可以写成数组（多个邮箱，页面上用分号隔开）
+      email: [
+        't.lei@nulondon.ac.uk',
+        'tengteng.lei@kcl.ac.uk',
+        'eetlei@ust.hk'
+      ],
       office: { en: '', zh: '' },
       address: {
         en: "Department of Engineering, King's College London, Strand, London WC2R 2LS, United Kingdom",
         zh: '英国伦敦国王学院工程系，Strand, London WC2R 2LS'
       },
       note: {
-        en: 'Email is the fastest way to reach me. I also read <a href="mailto:tengteng.lei@kcl.ac.uk">tengteng.lei@kcl.ac.uk</a>. I am happy to hear from prospective students and collaborators.',
-        zh: '邮件是联系我最快的方式，<a href="mailto:tengteng.lei@kcl.ac.uk">tengteng.lei@kcl.ac.uk</a> 我也会看。欢迎有意向的学生和合作者与我联系。'
+        en: 'Email is the fastest way to reach me — any of the three above will do. I am happy to hear from prospective students and collaborators.',
+        zh: '邮件是联系我最快的方式，上面三个都收。欢迎有意向的学生和合作者与我联系。'
       }
     }
   },
