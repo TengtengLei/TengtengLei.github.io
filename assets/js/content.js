@@ -52,8 +52,7 @@ window.SITE = {
     // 想加回来就在数组里补一行，格式见其他几行。
     links: [
       { icon: 'orcid',   label: { en: 'ORCID',          zh: 'ORCID'    }, url: 'https://orcid.org/0000-0002-3780-0058' },
-      // ↓ Scholar 主页地址栏里 user= 后面那一串，填进来就能用
-      { icon: 'scholar', label: { en: 'Google Scholar', zh: '学术主页' }, url: 'https://scholar.google.com/citations?user=YOUR_ID' },
+      { icon: 'scholar', label: { en: 'Google Scholar', zh: '学术主页' }, url: 'https://scholar.google.com/citations?user=bOvN8pwAAAAJ' },
       { icon: 'github',  label: { en: 'GitHub',         zh: 'GitHub'   }, url: 'https://github.com/TengtengLei' }
     ]
   },
@@ -218,7 +217,9 @@ window.SITE = {
       title: 'Neuromorphic Sensor-Perception Systems for Immersive Displays',
       authors: '*Tengteng Lei*#, Runxiao Shi#, Zong Liu, Yushen Hu, Man Wong',
       venue: '*IEEE Open Journal on Immersive Displays*, vol. 1, pp. 20–27.',
-      doi: '10.1109/OJID.2023.3343309',
+      // IEEE 没有把这篇的 DOI 正确提交给 Crossref，10.1109/OJID.2023.3343309
+      // 解析不了，所以这里直接给 Xplore 页面地址。
+      url: 'https://ieeexplore.ieee.org/document/10360208',
       links: []
     },
     {
