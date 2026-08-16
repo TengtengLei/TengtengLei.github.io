@@ -286,34 +286,100 @@ window.SITE = {
       venue: { en: '*International Conference on CAD-TFT* — oral.',
                zh: '*International Conference on CAD-TFT*，口头报告。' },
       links: []
+    },
+
+    /* ── 专利 ──────────────────────────────────────────────────────────
+       ⚠️ 下面两条的年份是我按 CN 公开号推的（CN120… ≈ 2025，CN116… ≈ 2023），
+          CV 里没写日期，请你核对一下。后三条有明确授权日期，是准确的。
+       ─────────────────────────────────────────────────────────────── */
+    {
+      year: 2025, type: 'patent',
+      title: { en: 'A Hysteresis Comparator Implemented Using Dual-Gate Thin-Film Transistors',
+               zh: '一种基于双栅薄膜晶体管的迟滞比较器' },
+      authors: '*Tengteng Lei*, Man Wong',
+      venue: { en: 'Chinese patent CN120512123A.', zh: '中国发明专利 CN120512123A。' },
+      links: []
+    },
+    {
+      year: 2023, type: 'patent',
+      title: { en: 'A Dynamic Offset-Cancellation Circuit Based on Dual-Gate Thin-Film Transistors',
+               zh: '一种基于双栅薄膜晶体管的动态失调消除电路' },
+      authors: 'Xuchi Liu, *Tengteng Lei*, Man Wong',
+      venue: { en: 'Chinese patent CN116800209A.', zh: '中国发明专利 CN116800209A。' },
+      links: []
+    },
+    {
+      year: 2022, type: 'patent',
+      title: { en: 'A High-Speed Gate Driving Unit and Circuit', zh: '一种高速栅极驱动单元及电路' },
+      authors: 'Shengdong Zhang, *Tengteng Lei*, Congwei Liao, Jie Huang',
+      venue: { en: 'Chinese patent CN109859669B — granted 2 September 2022.',
+               zh: '中国发明专利 CN109859669B，2022 年 9 月 2 日授权。' },
+      links: []
+    },
+    {
+      year: 2022, type: 'patent',
+      title: { en: 'Voltage Converter and Radio Frequency Identification Device', zh: '电压变换器及射频识别装置' },
+      authors: 'Shengdong Zhang, *Tengteng Lei*, Congwei Liao, Jie Huang',
+      venue: { en: 'Chinese patent CN109492740B — granted 1 March 2022.',
+               zh: '中国发明专利 CN109492740B，2022 年 3 月 1 日授权。' },
+      links: []
+    },
+    {
+      year: 2020, type: 'patent',
+      title: { en: 'Shift Register Unit, Gate Drive Circuit and Display Device', zh: '移位寄存器单元、栅极驱动电路及显示装置' },
+      authors: 'Shengdong Zhang, *Tengteng Lei*, Congwei Liao, Jie Huang',
+      venue: { en: 'Chinese patent CN109285505B — granted 23 June 2020.',
+               zh: '中国发明专利 CN109285505B，2020 年 6 月 23 日授权。' },
+      links: []
     }
   ],
 
   /* ── 5. 教学 ──────────────────────────────────────────────────────────
-     ⚠️ courses 现在是空的 —— 你的 CV 里没有课程信息，我不替你编。
-        等你开始授课，按下面注释里的格式往 courses 数组里加就行，
-        空着的时候这一块会显示「内容稍后补充」，不会显示假内容。
+     ⚠️ 下面的课程是占位示例，等你真的开课了把内容换掉。
 
-     一门课的格式：
-       {
-         code: 'ABC1234',
-         title: { en: 'Course Name', zh: '课程名称' },
-         meta:  { en: 'Institution · Term · Role', zh: '学校 · 学期 · 身份' },
-         desc:  { en: '…', zh: '…' },
-         materials: [
-           { kind: 'Video', label: { en: 'Lecture recordings', zh: '课程录像' },
-             url: 'https://…', external: true },
-           { kind: 'Slides', label: { en: 'Lecture 1', zh: '第一讲' },
-             url: 'files/teaching/lecture-01.pdf' }
-         ]
-       }
+     materials 现在每门课只留一行「课程录像」。想加更多就往数组里加：
+       { kind: 'Slides', label: { en: 'Lecture 1', zh: '第一讲' },
+         url: 'files/teaching/lecture-01.pdf' },
+     kind 是左边小标签的文字，随便写：'Slides' 'Notes' 'Syllabus' 'Reading' …
+     文件放 files/ 文件夹；外部链接（B站、YouTube）写完整网址并加 external: true。
      ─────────────────────────────────────────────────────────────────── */
   teaching: {
     lede: {
       en: 'Courses, materials, and answers to the questions students ask me most often.',
       zh: '课程、教学资料，以及学生问得最多的那些问题。'
     },
-    courses: [],
+    courses: [
+      {
+        code: 'ABC1234',
+        title: { en: 'Name of the Course', zh: '课程名称' },
+        meta: {
+          en: "King's College London · Autumn 2026 · Lecturer",
+          zh: '伦敦国王学院 · 2026 年秋季学期 · 主讲'
+        },
+        desc: {
+          en: 'A short paragraph on what the course covers and who it is for.',
+          zh: '用一段话说明这门课讲什么、面向哪些学生。'
+        },
+        materials: [
+          { kind: 'Video', label: { en: 'Lecture recordings', zh: '课程录像' }, url: 'https://www.youtube.com/playlist?list=XXXX', external: true }
+        ]
+      },
+      {
+        code: 'DEF5678',
+        title: { en: 'Another Course', zh: '另一门课程' },
+        meta: {
+          en: "King's College London · Spring 2027 · Teaching Assistant",
+          zh: '伦敦国王学院 · 2027 年春季学期 · 助教'
+        },
+        desc: {
+          en: 'A short paragraph on what the course covers.',
+          zh: '用一段话说明这门课讲什么。'
+        },
+        materials: [
+          { kind: 'Video', label: { en: 'Lecture recordings', zh: '课程录像' }, url: 'https://www.bilibili.com/video/BVxxxxxxxxx', external: true }
+        ]
+      }
+    ],
 
     statement: {
       title: { en: 'Teaching Philosophy', zh: '教学理念' },
@@ -358,42 +424,145 @@ window.SITE = {
   },
 
   /* ── 6. 科普 / 媒体 ───────────────────────────────────────────────────
-     ⚠️ 现在是空的。有视频或播客了再填，格式见下。
-        空着的时候页面会显示「内容稍后补充」。
+     ⚠️ 下面全是占位示例，有真内容了再换掉。
 
      视频不要上传到网站！传到 YouTube 或 B站，这里只填 ID：
        YouTube  https://www.youtube.com/watch?v=dQw4w9WgXcQ
-                → { platform: 'youtube', id: 'dQw4w9WgXcQ', title: {…}, meta: {…} }
+                → { platform: 'youtube', id: 'dQw4w9WgXcQ' }
        B 站     https://www.bilibili.com/video/BV1xx411c7mD
-                → { platform: 'bilibili', id: 'BV1xx411c7mD', title: {…}, meta: {…} }
+                → { platform: 'bilibili', id: 'BV1xx411c7mD' }
      ─────────────────────────────────────────────────────────────────── */
   media: {
     lede: {
       en: 'Talks, science communication and public engagement.',
       zh: '公开讲座、科普视频与公众传播。'
     },
-    videos: [],
-    podcast: null,
-    press: []
+
+    videos: [
+      {
+        platform: 'youtube', id: 'dQw4w9WgXcQ',
+        title: { en: 'Title of the video', zh: '视频标题' },
+        meta:  { en: 'Public lecture · 2026 · 42 min', zh: '公开讲座 · 2026 · 42 分钟' }
+      },
+      {
+        platform: 'bilibili', id: 'BV1xx411c7mD',
+        title: { en: 'Title of a Chinese-language explainer', zh: '一期中文科普视频的标题' },
+        meta:  { en: 'Science outreach · 2026 · 15 min', zh: '科普 · 2026 · 15 分钟' }
+      }
+    ],
+
+    // 不想要播客就把 podcast 设成 null
+    podcast: {
+      title: { en: 'Name of Your Podcast', zh: '你的播客名称' },
+      desc: {
+        en: 'One or two sentences about what the show is about and who it is for.',
+        zh: '用一两句话说明这档节目聊什么、给谁听。'
+      },
+      subscribe: [
+        { label: 'Apple Podcasts', url: 'https://podcasts.apple.com/...' },
+        { label: 'Spotify',        url: 'https://open.spotify.com/show/...' },
+        { label: { en: 'Xiaoyuzhou', zh: '小宇宙' }, url: 'https://www.xiaoyuzhoufm.com/podcast/...' }
+      ],
+      // audioUrl 填 mp3 直链会显示播放器；
+      // 或者用 embedUrl 填平台嵌入代码里的那个 src
+      episodes: [
+        {
+          number: 2,
+          title: { en: 'Episode title', zh: '本期标题' },
+          meta:  { en: '15 Aug 2026 · 48 min', zh: '2026年8月15日 · 48 分钟' },
+          desc:  { en: 'What this episode covers, in one or two sentences.', zh: '一两句话介绍这期聊了什么。' },
+          audioUrl: ''
+        },
+        {
+          number: 1,
+          title: { en: 'Episode title', zh: '本期标题' },
+          meta:  { en: '1 Aug 2026 · 52 min', zh: '2026年8月1日 · 52 分钟' },
+          desc:  { en: 'What this episode covers.', zh: '一两句话介绍这期聊了什么。' },
+          audioUrl: ''
+        }
+      ]
+    },
+
+    press: [
+      {
+        date: { en: 'Jul 2026', zh: '2026年7月' },
+        text: {
+          en: 'Quoted in <a href="https://example.com" target="_blank" rel="noopener">[Outlet]</a> on [topic].',
+          zh: '就【某话题】接受 <a href="https://example.com" target="_blank" rel="noopener">【媒体名】</a> 采访。'
+        }
+      }
+    ]
   },
 
   /* ── 7. 生活（此刻 + 兴趣爱好 + 推荐）──────────────────────────────
-     ⚠️ 全空 —— 你的爱好、在读的书、推荐的工具我都不知道，不能替你编。
+     ⚠️ 下面全是占位示例，换成你自己的。
         这一页是整个网站里最容易让人记住你的地方，值得花二十分钟填。
-
-     格式：
-       now.items:  { emoji: '📖', label: {en,zh}, text: {en,zh} }
-       hobbies:    { emoji: '📷', title: {en,zh}, body: {en,zh}, image: '' }
-       picks:      { title: {en,zh}, items: [ { name: '…', note: {en,zh}, url: '' } ] }
      ─────────────────────────────────────────────────────────────────── */
   life: {
     lede: {
-      en: 'Research is what I do, not all of what I am.',
-      zh: '做研究是我的工作，但不是我的全部。'
+      en: 'Research is what I do, not all of what I am. A few things I am into right now.',
+      zh: '做研究是我的工作，但不是我的全部。这里是我最近在鼓捣的一些事。'
     },
-    now: { updated: { en: '', zh: '' }, items: [] },
-    hobbies: [],
-    picks: []
+
+    // ── 此刻 ── 一个月更新一次就够了。emoji 直接换成你喜欢的。
+    now: {
+      updated: { en: 'Last updated August 2026', zh: '更新于 2026 年 8 月' },
+      items: [
+        { emoji: '📖', label: { en: 'Reading',        zh: '在读' }, text: { en: '[Book title] by [Author] — and slowly, a paper I keep meaning to finish.', zh: '《【书名】》，【作者】。还有一篇拖了很久没读完的论文。' } },
+        { emoji: '🎧', label: { en: 'Listening',      zh: '在听' }, text: { en: '[Podcast name], and far too much of one album on repeat.', zh: '【播客名】，以及单曲循环到有点过分的一张专辑。' } },
+        { emoji: '🔬', label: { en: 'Working on',     zh: '在忙' }, text: { en: '[Current project] — currently at the stage where nothing works yet.', zh: '【当前项目】—— 目前处于「什么都还跑不通」的阶段。' } },
+        { emoji: '🤔', label: { en: 'Thinking about', zh: '在想' }, text: { en: 'A question I cannot stop turning over: [the question].', zh: '一个最近老在脑子里转的问题：【问题】。' } },
+        { emoji: '🌱', label: { en: 'Learning',       zh: '在学' }, text: { en: '[A skill or language] — badly, but consistently.', zh: '【某项技能或语言】—— 学得很烂，但没停。' } }
+      ]
+    },
+
+    // ── 兴趣爱好卡片墙 ──
+    // 每张卡自动换一个颜色。想配图就填 image，不填就只有 emoji 和文字。
+    hobbies: [
+      { emoji: '📷', title: { en: 'Film photography', zh: '胶片摄影' },
+        body: { en: 'Mostly street scenes and badly-exposed skies. I develop at home.', zh: '主要拍街景，还有一堆曝光失败的天空。在家自己冲洗。' },
+        image: '' },
+      { emoji: '🥖', title: { en: 'Sourdough', zh: '烤面包' },
+        body: { en: 'My starter has a name and I am not going to apologise for that.', zh: '我的酵头有名字，这件事我不打算道歉。' } },
+      { emoji: '🏔', title: { en: 'Hiking', zh: '徒步' },
+        body: { en: 'Anywhere with a hill and no phone signal.', zh: '只要有山、没信号，去哪都行。' } },
+      { emoji: '🐈', title: { en: 'One opinionated cat', zh: '一只很有主见的猫' },
+        body: { en: 'Co-author on nothing, present at every video call.', zh: '一篇论文都没署名，但每场视频会议都到场。' } },
+      { emoji: '🎹', title: { en: 'Piano, badly', zh: '弹得很烂的钢琴' },
+        body: { en: 'Twenty years in, still working on the same three pieces.', zh: '弹了二十年，还是那三首。' } },
+      { emoji: '🧩', title: { en: 'Puzzles & board games', zh: '解谜与桌游' },
+        body: { en: 'Will happily explain the rules for longer than the game takes.', zh: '讲规则的时间通常比玩的时间还长。' } }
+    ],
+
+    // ── 推荐 / 书架片单 ── 每一组自动换一个颜色。url 留空就不加链接。
+    picks: [
+      {
+        title: { en: 'Books that changed how I think', zh: '改变我想法的书' },
+        items: [
+          { name: '[Book title] — [Author]', note: { en: 'One line on why it mattered to you.', zh: '一句话说明它为什么重要。' }, url: '' },
+          { name: '[Book title] — [Author]', note: { en: 'One line on why it mattered to you.', zh: '一句话说明它为什么重要。' }, url: '' }
+        ]
+      },
+      {
+        title: { en: 'Podcasts I actually finish', zh: '我真的听完的播客' },
+        items: [
+          { name: '[Podcast name]', note: { en: 'What it is about and who it suits.', zh: '聊什么、适合谁听。' }, url: '' }
+        ]
+      },
+      {
+        title: { en: 'Tools I rely on', zh: '离不开的工具' },
+        items: [
+          { name: 'Zotero', note: { en: 'Reference management. Free, open source.', zh: '文献管理。免费、开源。' }, url: 'https://www.zotero.org' },
+          { name: 'Cadence Virtuoso', note: { en: 'Where most of my working hours go.', zh: '我大部分工作时间都花在这上面。' }, url: '' }
+        ]
+      },
+      {
+        title: { en: 'Blogs & newsletters', zh: '常读的博客与邮件通讯' },
+        items: [
+          { name: '[Blog name]', note: { en: 'Why it is worth your inbox.', zh: '为什么值得占用你的收件箱。' }, url: '' }
+        ]
+      }
+    ]
   },
 
   /* ── 8. 留言板 ─────────────────────────────────────────────────────
@@ -488,21 +657,6 @@ window.SITE = {
             zh: '创新及科技基金 —— 基于氧化物 TFT 的屏下指纹感测技术，2023–2025，107 万港元。<em>参与人</em>' },
           { en: 'ICDT Huada Jiutian Cup Innovation Competition — Full-flow design of gate-driver-on-array circuits for flat-panel displays, 2022, ¥40,000. <em>Lead</em>',
             zh: 'ICDT 华大九天杯创新竞赛 —— 平板显示 GOA 电路全流程设计，2022，4 万元人民币。<em>负责人</em>' }
-        ]
-      },
-      {
-        title: { en: 'Patents', zh: '专利' },
-        items: [
-          { en: '<em>Tengteng Lei</em>, Man Wong. A hysteresis comparator implemented using dual-gate thin-film transistors. CN120512123A.',
-            zh: '<em>雷腾腾</em>，Man Wong。一种双栅薄膜晶体管迟滞比较器。CN120512123A。' },
-          { en: 'Xuchi Liu, <em>Tengteng Lei</em>, Man Wong. A dynamic offset-cancellation circuit based on dual-gate thin-film transistors. CN116800209A.',
-            zh: '刘旭驰，<em>雷腾腾</em>，Man Wong。基于双栅薄膜晶体管的动态失调消除电路。CN116800209A。' },
-          { en: 'Shengdong Zhang, <em>Tengteng Lei</em>, Congwei Liao, Jie Huang. A high-speed gate driving unit and circuit. CN109859669B — granted 2022.',
-            zh: '张盛东，<em>雷腾腾</em>，廖聪维，黄杰。一种高速栅极驱动单元及电路。CN109859669B，2022 年授权。' },
-          { en: 'Shengdong Zhang, <em>Tengteng Lei</em>, Congwei Liao, Jie Huang. Voltage converter and radio frequency identification device. CN109492740B — granted 2022.',
-            zh: '张盛东，<em>雷腾腾</em>，廖聪维，黄杰。电压变换器及射频识别装置。CN109492740B，2022 年授权。' },
-          { en: 'Shengdong Zhang, <em>Tengteng Lei</em>, Congwei Liao, Jie Huang. Shift register unit, gate drive circuit and display device. CN109285505B — granted 2020.',
-            zh: '张盛东，<em>雷腾腾</em>，廖聪维，黄杰。移位寄存器单元、栅极驱动电路及显示装置。CN109285505B，2020 年授权。' }
         ]
       },
       {

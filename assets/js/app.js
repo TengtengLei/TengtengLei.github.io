@@ -37,7 +37,8 @@
       all:       { en: 'All',            zh: '全部'     },
       journal:   { en: 'Journal',        zh: '期刊'     },
       conference:{ en: 'Conference',     zh: '会议'     },
-      preprint:  { en: 'In Review',      zh: '审稿中'   },
+      preprint:  { en: 'Preprint',       zh: '预印本'   },
+      patent:    { en: 'Patent',         zh: '专利'     },
       chapter:   { en: 'Chapter',        zh: '专著章节' },
       downloadCv:{ en: 'Download CV (PDF)', zh: '下载简历 PDF' },
       email:     { en: 'Email',          zh: '邮箱'     },
@@ -193,7 +194,7 @@
     if (!nonEmpty(pubs)) return h + emptyBlock() + '</div>';
 
     // 固定顺序，不跟着数据里谁先出现走
-    var ORDER = ['journal', 'conference', 'chapter', 'preprint'];
+    var ORDER = ['journal', 'conference', 'chapter', 'patent', 'preprint'];
     var types = ORDER.filter(function (ty) {
       return pubs.some(function (p) { return p.type === ty; });
     });

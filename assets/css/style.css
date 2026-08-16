@@ -390,7 +390,8 @@ html[data-theme="dark"] .icon-moon { display: block; }
 .chip[data-filter="journal"]    { --chip: var(--c-green);  }
 .chip[data-filter="conference"] { --chip: var(--c-blue);   }
 .chip[data-filter="preprint"]   { --chip: var(--c-orange); }
-.chip[data-filter="chapter"]    { --chip: var(--c-cyan);   }
+.chip[data-filter="patent"]     { --chip: var(--c-cyan);   }
+.chip[data-filter="chapter"]    { --chip: var(--c-sage);   }
 .chip[data-filter="all"]        { --chip: var(--accent);   }
 
 /* 未选中＝该颜色的淡色底，选中＝饱和色。
@@ -450,7 +451,8 @@ html[data-theme="dark"] .pub__authors .me { color: #1A1523; }
 .badge--journal    { background: var(--c-green);  }
 .badge--conference { background: var(--c-blue);   }
 .badge--preprint   { background: var(--c-orange); }
-.badge--chapter    { background: var(--c-cyan);   }
+.badge--patent     { background: var(--c-cyan);   }
+.badge--chapter    { background: var(--c-sage);   }
 
 /* ---------- 11. 教学 ---------- */
 /* 教学理念：这一页的开场白，比正文稍大一点 */
