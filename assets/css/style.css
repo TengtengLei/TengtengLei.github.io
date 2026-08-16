@@ -369,16 +369,13 @@ html[data-theme="dark"] .icon-moon { display: block; }
   transition: transform .14s, box-shadow .14s;
 }
 .news li:hover { transform: translate(-2px,-2px); box-shadow: 6px 6px 0 var(--shadow); }
+/* 日期一律用页面主题色 —— 日期之间没有类别差异，不该用不同颜色暗示有 */
 .news time {
   font-family: var(--font-display); font-size: .82rem; font-weight: 500;
-  background: var(--c-yellow); color: #1A1523;
+  background: var(--accent); color: #1A1523;
   border: 2px solid var(--line); border-radius: 100px;
   padding: .05rem .6rem; white-space: nowrap;
 }
-.news li:nth-child(5n+2) time { background: var(--c-cyan);   }
-.news li:nth-child(5n+3) time { background: var(--c-pink);   color: #1A1523; }
-.news li:nth-child(5n+4) time { background: var(--c-green);  }
-.news li:nth-child(5n+5) time { background: var(--c-purple); color: #1A1523; }
 @media (max-width: 560px) { .news li { grid-template-columns: 1fr; gap: .4rem; } .news time { justify-self: start; } }
 
 /* ---------- 10. 论文列表 ---------- */
@@ -478,11 +475,8 @@ html[data-theme="dark"] .pub__authors .me { color: #1A1523; }
   font-family: var(--font-display); font-size: .7rem; font-weight: 500;
   border: 2px solid var(--line); border-radius: 100px;
   padding: .02rem .5rem; min-width: 66px; text-align: center; color: #1A1523;
-  background: var(--c-yellow);
+  background: var(--accent);
 }
-.materials li:nth-child(4n+2) a::before { background: var(--c-cyan);  }
-.materials li:nth-child(4n+3) a::before { background: var(--c-pink);  color: #1A1523; }
-.materials li:nth-child(4n+4) a::before { background: var(--c-green); }
 .materials a::after { content: "↓"; margin-left: auto; font-weight: 900; }
 .materials a[target="_blank"]::after { content: "↗"; }
 
@@ -514,7 +508,9 @@ html[data-theme="dark"] .pub__authors .me { color: #1A1523; }
 /* ---------- 12. 视频 / 播客 ---------- */
 .video { border: var(--bw) solid var(--line); border-radius: var(--r); overflow: hidden; background: var(--surface); box-shadow: 6px 6px 0 var(--shadow); transition: transform .16s, box-shadow .16s; }
 .video:hover { transform: translate(-3px,-3px); box-shadow: 9px 9px 0 var(--shadow); }
-.video__frame { position: relative; aspect-ratio: 16/9; background: var(--c-purple); cursor: pointer; display: block; width: 100%; border: 0; border-bottom: var(--bw) solid var(--line); padding: 0; overflow: hidden; }
+/* 没有缩略图时（B站）露出的底色，用页面主题色的淡调而不是另起一个颜色 */
+.video__frame { position: relative; aspect-ratio: 16/9;
+  background: color-mix(in srgb, var(--accent) 28%, var(--surface)); cursor: pointer; display: block; width: 100%; border: 0; border-bottom: var(--bw) solid var(--line); padding: 0; overflow: hidden; }
 .video__frame img { width: 100%; height: 100%; object-fit: cover; }
 .video__frame iframe { width: 100%; height: 100%; border: 0; display: block; }
 .video__play { position: absolute; inset: 0; display: grid; place-items: center; background: linear-gradient(180deg, rgba(0,0,0,.05), rgba(0,0,0,.35)); }
@@ -630,12 +626,8 @@ html[data-theme="dark"] .pub__authors .me { color: #1A1523; }
 .timeline li::before {
   content: ""; position: absolute; left: -2.1rem; top: .5rem;
   width: 19px; height: 19px; border-radius: 50%;
-  background: var(--c-pink); border: 2.5px solid var(--line);
+  background: var(--accent); border: 2.5px solid var(--line);
 }
-.timeline li:nth-child(5n+2)::before { background: var(--c-blue);   }
-.timeline li:nth-child(5n+3)::before { background: var(--c-green);  }
-.timeline li:nth-child(5n+4)::before { background: var(--c-orange); }
-.timeline li:nth-child(5n+5)::before { background: var(--c-purple); }
 .timeline__when {
   display: inline-block; font-family: var(--font-display); font-size: .82rem; font-weight: 500;
   border: 2px solid var(--line); border-radius: 100px; padding: .02rem .65rem;

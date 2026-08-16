@@ -177,9 +177,15 @@ window.SITE = {
   ],
 
   /* ── 5. 教学（成为教师后重点填这里）───────────────────────────────────
-     materials 里的 kind 决定左边小标签的文字，随便写：
-       'Slides' 'Notes' 'Syllabus' 'Video' 'Reading' 'Problem set' …
-     文件放在 files/ 文件夹里；外部链接（B站、YouTube）直接写完整网址。
+     materials 是每门课底下的资料行，现在每门课只留了一行「课程录像」。
+     想加更多就往数组里加，格式一样：
+
+       { kind: 'Slides', label: { en: 'Lecture 1', zh: '第一讲' },
+         url: 'files/teaching/abc1234-lecture-01.pdf' },
+
+     kind 是左边小标签的文字，随便写：'Slides' 'Notes' 'Syllabus' 'Reading' …
+     文件放 files/ 文件夹；外部链接（B站、YouTube）直接写完整网址，
+     并加上 external: true。
      ─────────────────────────────────────────────────────────────────── */
   teaching: {
     lede: {
@@ -199,10 +205,7 @@ window.SITE = {
           zh: '用一段话说明这门课讲什么、面向哪些学生。'
         },
         materials: [
-          { kind: 'Syllabus', label: { en: 'Course syllabus',            zh: '教学大纲'      }, url: 'files/teaching/abc1234-syllabus.pdf' },
-          { kind: 'Slides',   label: { en: 'Lecture 1 — Introduction',   zh: '第一讲 · 导论' }, url: 'files/teaching/abc1234-lecture-01.pdf' },
-          { kind: 'Slides',   label: { en: 'Lecture 2 — Core Concepts',  zh: '第二讲 · 核心概念' }, url: 'files/teaching/abc1234-lecture-02.pdf' },
-          { kind: 'Video',    label: { en: 'Lecture recordings',         zh: '课程录像'      }, url: 'https://www.youtube.com/playlist?list=XXXX', external: true }
+          { kind: 'Video', label: { en: 'Lecture recordings', zh: '课程录像' }, url: 'https://www.youtube.com/playlist?list=XXXX', external: true }
         ]
       },
       {
@@ -217,7 +220,7 @@ window.SITE = {
           zh: '用一段话说明这门课讲什么。'
         },
         materials: [
-          { kind: 'Notes', label: { en: 'Tutorial notes', zh: '习题课讲义' }, url: 'files/teaching/def5678-notes.pdf' }
+          { kind: 'Video', label: { en: 'Lecture recordings', zh: '课程录像' }, url: 'https://www.bilibili.com/video/BVxxxxxxxxx', external: true }
         ]
       }
     ],
