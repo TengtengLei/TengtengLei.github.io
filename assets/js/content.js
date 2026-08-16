@@ -689,7 +689,9 @@ window.SITE = {
      配好之后把两个值填到下面就能用了：
 
        url     —— 形如 https://abcdefghijk.supabase.co
-       anonKey —— 很长的一串，以 eyJ 开头
+                  （就是 Supabase 里的 Project ID 前后加上这两段）
+       anonKey —— Settings → API Keys 里的 Publishable key，
+                  以 sb_publishable_ 开头
 
      ⚠️ anonKey 出现在公开仓库里是正常的，它本来就是给浏览器用的公钥。
         真正拦住坏人的是数据库那边的权限规则（README 里的 SQL 已经配好）：
@@ -707,7 +709,7 @@ window.SITE = {
     },
     supabase: {
       url:     '',   // 'https://xxxxxxxxxxxx.supabase.co'
-      anonKey: ''    // 'eyJhbGciOi……' 很长的一串
+      anonKey: ''    // 'sb_publishable_xxxxxxxx……'
     }
   },
 

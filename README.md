@@ -202,12 +202,19 @@ Supabase 免费额度对个人主页来说绰绰有余，不用绑卡。
 
 **第三步：把两个值填进网页**
 
-左侧 `Project Settings` → `API`，复制这两个值到 `content.js` 第 8 节：
+左侧 `Settings` → `API Keys`，复制这两个值到 `content.js` 第 8 节：
 
 | Supabase 里叫什么 | 填到 `guestbook.supabase` 的 | 长什么样 |
 |---|---|---|
 | Project URL | `url` | `https://abcdefgh.supabase.co` |
-| `anon` `public` key | `anonKey` | `eyJhbGciOi……` 很长一串 |
+| **Publishable key** | `anonKey` | `sb_publishable_xxxxxxxx……` |
+
+Project URL 在 `Settings` → `General` 那页看不到完整的，但它就是
+`https://` + `Project ID` + `.supabase.co`，照着拼即可。
+
+> 页面上还会有一个 `Legacy API Keys` 标签，里面是老式的 `anon` key
+> （`eyJ` 开头）。**别用那个**，Supabase 2026 年底就停用它了。
+> 至于 `service_role` / `secret`，那是万能钥匙，**绝对不能公开**。
 
 存盘、推到 GitHub，留言板就活了。配好之前那一页显示「还没开通」，
 不影响其他页面。
