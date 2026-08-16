@@ -23,9 +23,10 @@
 
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:ital,wght@0,400;0,600;0,700;0,900;1,400&display=swap" rel="stylesheet">
+<!-- 字体是自托管的（assets/fonts/），不再从 Google 加载。
+     @font-face 规则在 style.css 顶部。见 README「为什么字体放在自己仓库里」。 -->
+<link rel="preload" href="assets/fonts/nunito-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/fredoka-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
 
 <link rel="stylesheet" href="assets/css/style.css">
 
