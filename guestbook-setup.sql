@@ -84,6 +84,9 @@ create trigger messages_rate_limit_trg
 -- 要删只有你自己上 supabase.com 后台。
 alter table public.messages enable row level security;
 
+-- Supabase 建新表时会自动把增删改查全套权限发给访客角色。
+-- 先全部收回，再只发「读」和「写」两把钥匙。
+revoke all on public.messages from anon, authenticated;
 grant select, insert on public.messages to anon;
 
 drop policy if exists "anyone can read visible messages" on public.messages;
